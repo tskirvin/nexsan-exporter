@@ -22,7 +22,7 @@ case "$1" in
     configure)
         adduser --quiet --system --force-badname --group \
             --home /nonexistent --no-create-home \
-            _igd-exporter
+            _nexsan-exporter
     ;;
 
     abort-upgrade|abort-remove|abort-deconfigure)

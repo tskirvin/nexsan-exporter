@@ -18,10 +18,10 @@ else:
     version = '0.dev{}+g{}'.format(build_no, git_ref)
 
 setup(
-    name = 'igd-exporter',
+    name = 'nexsan-exporter',
     version = version,
-    description = 'Prometheus exporter for UPnP Internet Gateway Device metrics',
-    url = 'https://github.com/yrro/igd-exporter',
+    description = 'Prometheus exporter for Nexsan arrays',
+    url = 'https://github.com/yrro/nexsan-exporter',
     author = 'Sam Morris',
     author_email = 'sam@robots.org.uk',
     license = 'MIT',
@@ -32,18 +32,18 @@ setup(
         'Environment :: No Input/Output (Daemon)',
         'Operating System :: POSIX :: Linux',
         'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
+        'Programming Language :: Python :: 3.5',
         'Topic :: System :: Monitoring',
     ],
-    keywords = 'prometheus monitoring upnp igd',
-    packages = ['igd_exporter'],
+    keywords = 'prometheus monitoring nexsan storage',
+    packages = ['nexsan_exporter'],
     install_requires = [
         'prometheus_client',
         'setuptools'
     ],
     entry_points = {
         'console_scripts': [
-            'igd-exporter = igd_exporter:main',
+            'nexsan-exporter = nexsan_exporter:main',
         ],
     },
 )

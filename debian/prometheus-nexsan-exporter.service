@@ -1,11 +1,11 @@
 [Unit]
 Description=Prometheus exporter UPnP Internet Gateway Device metrics
-Documentation=https://github.com/yrro/igd-exporter file:///usr/share/doc/prometheus-igd-exporter/README.md
+Documentation=https://github.com/yrro/nexsan-exporter file:///usr/share/doc/prometheus-nexsan-exporter/README.md
 
 [Service]
 Restart=always
-User=_igd-exporter
-ExecStart=/usr/bin/igd-exporter
+User=_nexsan-exporter
+ExecStart=/usr/bin/nexsan-exporter
 Environment=PYTHONUNBUFFERED=1
 NoNewPrivileges=true
 ProtectControlGroups=true
