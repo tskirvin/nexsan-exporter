@@ -11,7 +11,7 @@ Running
 -------
 
 ```
-$ python3 -m pip install git+https://github.com/yrro/nexsan.git
+$ python3 -m pip install git+https://github.com/yrro/nexsan-exporter.git
 $ nexsan-exporter
 ```
 
