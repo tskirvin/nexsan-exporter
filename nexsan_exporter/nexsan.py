@@ -16,24 +16,24 @@ def probe(target, user, pass_):
     url = urllib.parse.urlunsplit(('http', target, '/admin/opstats.asp', None, None))
     req = urllib.request.Request(url)
     req.add_header(b'Authorization', auth)
-
-    return Collector(req)
+    with urllib.request.urlopen(req, timeout=5) as resp:
+        return Collector(ElementTree.parse(resp))
 
 class Collector:
-    def __init__(self, req):
-        self.__req = req
+    def __init__(self, opstats):
+        self.__opstats = opstats
 
     def collect(self):
-        with urllib.request.urlopen(self.__req, timeout=5) as stats_f:
-            stats = ElementTree.parse(stats_f)
-            sys_details = stats.find('nexsan_sys_details')
-            if sys_details:
-                yield from self.collect_sys_details(sys_details)
+        sys_details = self.__opstats.find('nexsan_sys_details')
+        if sys_details:
+            yield from self.collect_sys_details(sys_details)
 
     def collect_sys_details(self, sys_details):
         labels = ['friendly_name', 'system_name', 'system_id', 'firmware_version', 'date']
         values = []
         for l in labels:
-            values.append(sys_details.findtext(label))
-        g = prometheus_client.core.GaugeMetricFamily('nexsan_sys_details', labels)
+            values.append(sys_details.findtext(l))
+
+        g = prometheus_client.core.UntypedMetricFamily('nexsan_sys_details', '', labels=labels)
         g.add_metric(values, 1)
+        yield g

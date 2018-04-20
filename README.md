@@ -106,3 +106,15 @@ or, without installing:
 ```
 $ python3 -m nexsan_exporter
 ```
+
+To run the tests:
+
+```
+$ python3 setup.py test
+```
+
+For coverage reports:
+
+```
+$ python3 -m pytest --cov=temper_exporter --cov-report=html
+```
