@@ -1,7 +1,6 @@
 import os
 from xml.etree import ElementTree
 
-import prometheus_client
 import pytest
 
 from nexsan_exporter import nexsan
@@ -17,20 +16,18 @@ def datadir(request):
     assert os.path.isdir(test_dir)
     return test_dir
 
-@pytest.fixture
-def registry(request):
-    return prometheus_client.CollectorRegistry()
-
 @pytest.mark.xfail
-def test_collector_opstats1(datadir, registry):
+def test_collector_opstats1(datadir):
     with open(os.path.join(datadir, 'opstats1.xml')) as f:
-        registry.register(nexsan.Collector(ElementTree.parse(f)))
-
-    body = prometheus_client.generate_latest(registry).split(b'\n')
+        metrics = list(nexsan.Collector(ElementTree.parse(f)).collect())
+        from pprint import pprint
+        pprint(list(m.samples for m in metrics))
+        assert [] == metrics
 
 @pytest.mark.xfail
-def test_collector_opstats2(datadir, registry):
+def test_collector_opstats2(datadir):
     with open(os.path.join(datadir, 'opstats2.xml')) as f:
-        registry.register(nexsan.Collector(ElementTree.parse(f)))
-
-    body = prometheus_client.generate_latest(registry).split(b'\n')
+        metrics = list(nexsan.Collector(ElementTree.parse(f)).collect())
+        from pprint import pprint
+        pprint(list(m.samples for m in metrics))
+        assert [] == metrics
