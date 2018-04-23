@@ -32,7 +32,7 @@ class Collector:
             yield from self.collect_env_status(env_status)
 
     def collect_sys_details(self, sys_details):
-        labels = ['friendly_name', 'system_name', 'system_id', 'firmware_version', 'date']
+        labels = ['friendly_name', 'system_name', 'system_id', 'firmware_version']
         values = []
         for l in labels:
             values.append(sys_details.findtext(l))
@@ -40,6 +40,8 @@ class Collector:
         g = prometheus_client.core.UntypedMetricFamily('nexsan_sys_details', '', labels=labels)
         g.add_metric(values, 1)
         yield g
+
+        yield prometheus_client.core.CounterMetricFamily('nexsan_sys_date', '', int(sys_details.findtext('date')))
 
     def collect_env_status(self, env_status):
         for e in env_status.iterfind('enclosure'):
