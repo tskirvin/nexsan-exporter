@@ -88,10 +88,8 @@ def nexsan_psu(request):
             <psu id="2">
               <state good="yes" power_watt="546">OK</state>
               <temperature_deg_c good="yes">41</temperature_deg_c>
-              <blower_rpm id="0" good="yes">14438</blower_rpm>
-              <blower_rpm id="1" good="yes">14210</blower_rpm>
-              <blower_rpm id="2" good="yes">14210</blower_rpm>
-              <blower_rpm id="3" good="yes">14210</blower_rpm>
+              <blower_rpm id="3" good="yes">4444</blower_rpm>
+              <blower_rpm id="4" good="yes">7777</blower_rpm>
             </psu>
           </enclosure>
         </nexsan_env_status>
@@ -136,3 +134,21 @@ def test_collector_psu_temp_good_0(nexsan_psu):
     assert 'gauge' == mf.type
     assert [('nexsan_env_psu_temp_good', {'psu': '2', 'enclosure': '1'}, 0)] == mf.samples
 
+def test_collector_psu_blower_rpm(nexsan_psu):
+    c = nexsan.Collector(nexsan_psu)
+    mf = getmf(c.collect(), 'nexsan_env_psu_blower_rpm')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_env_psu_blower_rpm', {'psu': '2', 'enclosure': '1', 'blower': '3'}, 4444),
+        ('nexsan_env_psu_blower_rpm', {'psu': '2', 'enclosure': '1', 'blower': '4'}, 7777),
+    ] == mf.samples
+
+def test_collector_psu_blower_good(nexsan_psu):
+    nexsan_psu.find('.//psu/blower_rpm[@id="4"]').attrib['good'] = 'no'
+    c = nexsan.Collector(nexsan_psu)
+    mf = getmf(c.collect(), 'nexsan_env_psu_blower_good')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_env_psu_blower_good', {'psu': '2', 'enclosure': '1', 'blower': '3'}, 1),
+        ('nexsan_env_psu_blower_good', {'psu': '2', 'enclosure': '1', 'blower': '4'}, 0),
+    ] == mf.samples

@@ -68,3 +68,11 @@ class Collector:
         g4 = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_temp_good', '', labels=labels)
         g4.add_metric(values, self.isgood(psu.find('temperature_deg_c')))
         yield g4
+
+        g5 = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_blower_rpm', '', labels=labels + ['blower'])
+        g6 = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_blower_good', '', labels=labels + ['blower'])
+        for b in psu.iterfind('./blower_rpm'):
+            g5.add_metric(values + [b.attrib['id']], int(b.text))
+            g6.add_metric(values + [b.attrib['id']], self.isgood(b))
+        yield g5
+        yield g6
