@@ -91,3 +91,10 @@ class Collector:
         yield g1
         yield g2
 
+        g3 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_celsius', '', labels = labels + ['temp'])
+        g4 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_good', '', labels = labels + ['temp'])
+        for t in controller.iterfind('./temperature_deg_c'):
+            g3.add_metric(values + [t.attrib['id']], float(t.text))
+            g4.add_metric(values + [t.attrib['id']], self.isgood(t))
+        yield g3
+        yield g4
