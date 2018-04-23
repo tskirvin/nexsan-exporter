@@ -31,7 +31,7 @@ class Collector:
             return 0
 
     def collect(self):
-        for child in self.__opstats.iterfind('.//*'):
+        for child in self.__opstats.iterfind('./*'):
             if child.tag == 'nexsan_sys_details':
                 yield from self.collect_sys_details(child)
             elif child.tag == 'nexsan_env_status':
