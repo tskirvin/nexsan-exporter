@@ -1,6 +1,10 @@
-*.py[co]
+/.cache/
 /*.egg-info/
 /.eggs/
+*.py[co]
+
+# Coverage
+/.coverage
 /htmlcov/
 
 # Created by Debian package build process
