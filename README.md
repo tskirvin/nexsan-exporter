@@ -116,5 +116,5 @@ $ python3 setup.py test
 For coverage reports:
 
 ```
-$ python3 -m pytest --cov=temper_exporter --cov-report=html
+$ python3 -m pytest --cov=nexsan_exporter --cov-report=html
 ```
