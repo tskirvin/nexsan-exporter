@@ -48,6 +48,8 @@ class Collector:
     def collect_env_status(self, env_status):
         for p in env_status.iterfind('.//psu'):
             yield from self.collect_psu(p)
+        for c in env_status.iterfind('.//controller'):
+            yield from self.collect_controller(c)
 
     def collect_psu(self, psu):
         labels = ['psu', 'enclosure']
@@ -76,3 +78,16 @@ class Collector:
             g6.add_metric(values + [b.attrib['id']], self.isgood(b))
         yield g5
         yield g6
+
+    def collect_controller(self, controller):
+        labels = ['controller', 'enclosure']
+        values = [controller.attrib['id'], self.__parent_map[controller].attrib['id']]
+
+        g1 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_voltage_volts', '', labels = labels + ['voltage'])
+        g2 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_voltage_good', '', labels = labels + ['voltage'])
+        for v in controller.iterfind('./voltage'):
+            g1.add_metric(values + [v.attrib['id']], float(v.text))
+            g2.add_metric(values + [v.attrib['id']], self.isgood(v))
+        yield g1
+        yield g2
+

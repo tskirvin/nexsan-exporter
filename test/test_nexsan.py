@@ -152,3 +152,42 @@ def test_collector_psu_blower_good(nexsan_psu):
         ('nexsan_env_psu_blower_good', {'psu': '2', 'enclosure': '1', 'blower': '3'}, 1),
         ('nexsan_env_psu_blower_good', {'psu': '2', 'enclosure': '1', 'blower': '4'}, 0),
     ] == mf.samples
+
+@pytest.fixture
+def nexsan_controller(request):
+    return ET.fromstring('''
+      <nexsan_op_status version="2" status="experimental">
+        <nexsan_env_status version="3" status="experimental">
+          <enclosure id="1">
+            <controller id="2">
+              <voltage id="CPU" good="yes">1.18</voltage>
+              <voltage id="1V0" good="yes">0.97</voltage>
+              <temperature_deg_c id="PCB" good="yes">44</temperature_deg_c>
+              <temperature_deg_c id="CPU" good="yes">74</temperature_deg_c>
+              <battery id="3">
+                <charge_state good="yes">Fully charged</charge_state>
+              </battery>
+            </controller>
+          </enclosure>
+        </nexsan_env_status>
+      </nexsan_op_status>
+    ''')
+
+def test_collector_controller_voltage_volts(nexsan_controller):
+    c = nexsan.Collector(nexsan_controller)
+    mf = getmf(c.collect(), 'nexsan_env_controller_voltage_volts')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_env_controller_voltage_volts', {'voltage': 'CPU', 'controller': '2', 'enclosure': '1'}, 1.18),
+        ('nexsan_env_controller_voltage_volts', {'voltage': '1V0', 'controller': '2', 'enclosure': '1'}, 0.97),
+    ] == mf.samples
+
+def test_collector_controller_voltage_good(nexsan_controller):
+    nexsan_controller.find('.//controller/voltage[@id="1V0"]').attrib['good'] = 'no'
+    c = nexsan.Collector(nexsan_controller)
+    mf = getmf(c.collect(), 'nexsan_env_controller_voltage_good')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_env_controller_voltage_good', {'voltage': 'CPU', 'controller': '2', 'enclosure': '1'}, 1),
+        ('nexsan_env_controller_voltage_good', {'voltage': '1V0', 'controller': '2', 'enclosure': '1'}, 0),
+    ] == mf.samples
