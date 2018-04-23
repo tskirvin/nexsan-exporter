@@ -253,3 +253,25 @@ def test_collector_controller_battery_charge_good_1(nexsan_controller):
     assert [
         ('nexsan_env_controller_battery_charge_good', {'battery': '3', 'controller': '2', 'enclosure': '1'}, 0),
     ] == mf.samples
+
+def test_collector_controller_multi():
+    nexsan_psu_multi = ET.fromstring('''
+      <nexsan_op_status version="2" status="experimental">
+        <nexsan_env_status version="3" status="experimental">
+          <enclosure id="1">
+            <controller id="2">
+              <voltage id="CPU" good="yes">1.18</voltage>
+            </controller>
+            <controller id="4">
+              <voltage id="CPU" good="yes">3.2</voltage>
+            </controller>
+          </enclosure>
+        </nexsan_env_status>
+      </nexsan_op_status>
+        ''')
+    c = nexsan.Collector(nexsan_psu_multi)
+    mf = getmf(c.collect(), 'nexsan_env_controller_voltage_good')
+    assert [
+        ('nexsan_env_controller_voltage_good', {'controller': '2', 'enclosure': '1', 'voltage': 'CPU'}, 1),
+        ('nexsan_env_controller_voltage_good', {'controller': '4', 'enclosure': '1', 'voltage': 'CPU'}, 1),
+    ] == mf.samples
