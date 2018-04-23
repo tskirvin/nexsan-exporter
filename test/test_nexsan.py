@@ -41,8 +41,9 @@ def getmf(families, name):
             skipped.append(f.name)
     raise Exception('Metric family "{}" not found (got {!r})'.format(name, skipped))
 
-def test_collector_sys_details():
-    c = nexsan.Collector(ElementTree.fromstring('''
+@pytest.fixture
+def nexsan_sys(request):
+    return ElementTree.fromstring('''
         <nexsan_op_status version="2" status="experimental">
           <nexsan_sys_details version="1" status="experimental">
             <friendly_name>nnn</friendly_name>
@@ -52,23 +53,16 @@ def test_collector_sys_details():
             <date human="Tuesday 17-Apr-2018 11:07">1523963221</date>
           </nexsan_sys_details>
         </nexsan_op_status>
-        '''))
+    ''')
+
+def test_collector_sys_details(nexsan_sys):
+    c = nexsan.Collector(nexsan_sys)
     mf = getmf(c.collect(), 'nexsan_sys_details')
     assert 'untyped' == mf.type
     assert [('nexsan_sys_details', {'firmware_version': 'fff', 'friendly_name': 'nnn', 'system_id': 'iii', 'system_name': 'sss'}, 1)] == mf.samples
 
-def test_collector_sys_date():
-    c = nexsan.Collector(ElementTree.fromstring('''
-        <nexsan_op_status version="2" status="experimental">
-          <nexsan_sys_details version="1" status="experimental">
-            <friendly_name>nnn</friendly_name>
-            <system_name>sss</system_name>
-            <system_id>iii</system_id>
-            <firmware_version>fff</firmware_version>
-            <date human="Tuesday 17-Apr-2018 11:07">1523963221</date>
-          </nexsan_sys_details>
-        </nexsan_op_status>
-        '''))
+def test_collector_sys_date(nexsan_sys):
+    c = nexsan.Collector(nexsan_sys)
     mf = getmf(c.collect(), 'nexsan_sys_date')
     assert 'counter' == mf.type
     assert [('nexsan_sys_date', {}, 1523963221)] == mf.samples
