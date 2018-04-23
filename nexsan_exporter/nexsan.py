@@ -24,6 +24,20 @@ class Collector:
         self.__opstats = opstats
         self.__parent_map = {c: p for p in opstats.iter() for c in p}
 
+        self.__nexsan_sys_details = prometheus_client.core.UntypedMetricFamily('nexsan_sys_details', '', labels=['friendly_name', 'system_name', 'system_id', 'firmware_version'])
+        self.__nexsan_sys_date = prometheus_client.core.CounterMetricFamily('nexsan_sys_date', '')
+        self.__nexsan_env_psu_power_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_power_good', '', labels=['psu', 'enclosure'])
+        self.__nexsan_env_psu_power_watts = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_power_watts', '', labels=['psu', 'enclosure'])
+        self.__nexsan_env_psu_temp_celsius = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_temp_celsius', '', labels=['psu', 'enclosure'])
+        self.__nexsan_env_psu_temp_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_temp_good', '', labels=['psu', 'enclosure'])
+        self.__nexsan_env_psu_blower_rpm = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_blower_rpm', '', labels=['psu', 'enclosure', 'blower'])
+        self.__nexsan_env_psu_blower_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_blower_good', '', labels=['psu', 'enclosure', 'blower'])
+        self.__nexsan_env_controller_voltage_volts = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_voltage_volts', '', labels=['controller', 'enclosure', 'voltage'])
+        self.__nexsan_env_controller_voltage_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_voltage_good', '', labels=['controller', 'enclosure', 'voltage'])
+        self.__nexsan_env_controller_temp_celsius = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_celsius', '', labels=['controller', 'enclosure', 'temp'])
+        self.__nexsan_env_controller_temp_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_good', '', labels=['controller', 'enclosure', 'temp'])
+        self.__nexsan_env_controller_battery_charge_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_battery_charge_good', '', labels=['controller', 'enclosure', 'battery'])
+
     def isgood(self, elem):
         if elem.attrib['good'] == 'yes':
             return 1
@@ -33,73 +47,44 @@ class Collector:
     def collect(self):
         for child in self.__opstats.iterfind('./*'):
             if child.tag == 'nexsan_sys_details':
-                yield from self.collect_sys_details(child)
+                self.collect_sys_details(child)
             elif child.tag == 'nexsan_env_status':
-                yield from self.collect_env_status(child)
+                self.collect_env_status(child)
+
+        yield from (v for k, v in self.__dict__.items() if k.startswith('_Collector__nexsan_'))
 
     def collect_sys_details(self, sys_details):
-        labels = ['friendly_name', 'system_name', 'system_id', 'firmware_version']
-        g = prometheus_client.core.UntypedMetricFamily('nexsan_sys_details', '', labels=labels)
-        g.add_metric([sys_details.findtext(l) for l in labels], 1)
-        yield g
-
-        yield prometheus_client.core.CounterMetricFamily('nexsan_sys_date', '', int(sys_details.findtext('date')))
+        self.__nexsan_sys_details.add_metric([sys_details.findtext('./' + l) for l in self.__nexsan_sys_details._labelnames], 1)
+        self.__nexsan_sys_date.add_metric([], int(sys_details.findtext('./date')))
 
     def collect_env_status(self, env_status):
         for p in env_status.iterfind('.//psu'):
-            yield from self.collect_psu(p)
+            self.collect_psu(p)
         for c in env_status.iterfind('.//controller'):
-            yield from self.collect_controller(c)
+            self.collect_controller(c)
 
     def collect_psu(self, psu):
-        labels = ['psu', 'enclosure']
         values = [psu.attrib['id'], self.__parent_map[psu].attrib['id']]
 
-        g1 = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_power_good', '', labels=labels)
-        g1.add_metric(values, self.isgood(psu.find('state')))
-        yield g1
+        self.__nexsan_env_psu_power_good.add_metric(values, self.isgood(psu.find('./state')))
+        self.__nexsan_env_psu_power_watts.add_metric(values, int(psu.find('./state').attrib['power_watt']))
+        self.__nexsan_env_psu_temp_celsius.add_metric(values, int(psu.find('./temperature_deg_c').text))
+        self.__nexsan_env_psu_temp_good.add_metric(values, self.isgood(psu.find('./temperature_deg_c')))
 
-        g2 = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_power_watts', '', labels=labels)
-        g2.add_metric(values, int(psu.find('state').attrib['power_watt']))
-        yield g2
-
-        g3 = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_temp_celsius', '', labels=labels)
-        g3.add_metric(values, int(psu.find('temperature_deg_c').text))
-        yield g3
-
-        g4 = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_temp_good', '', labels=labels)
-        g4.add_metric(values, self.isgood(psu.find('temperature_deg_c')))
-        yield g4
-
-        g5 = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_blower_rpm', '', labels=labels + ['blower'])
-        g6 = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_blower_good', '', labels=labels + ['blower'])
         for b in psu.iterfind('./blower_rpm'):
-            g5.add_metric(values + [b.attrib['id']], int(b.text))
-            g6.add_metric(values + [b.attrib['id']], self.isgood(b))
-        yield g5
-        yield g6
+            self.__nexsan_env_psu_blower_rpm.add_metric(values + [b.attrib['id']], int(b.text))
+            self.__nexsan_env_psu_blower_good.add_metric(values + [b.attrib['id']], self.isgood(b))
 
     def collect_controller(self, controller):
-        labels = ['controller', 'enclosure']
         values = [controller.attrib['id'], self.__parent_map[controller].attrib['id']]
 
-        g1 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_voltage_volts', '', labels = labels + ['voltage'])
-        g2 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_voltage_good', '', labels = labels + ['voltage'])
         for v in controller.iterfind('./voltage'):
-            g1.add_metric(values + [v.attrib['id']], float(v.text))
-            g2.add_metric(values + [v.attrib['id']], self.isgood(v))
-        yield g1
-        yield g2
+            self.__nexsan_env_controller_voltage_volts.add_metric(values + [v.attrib['id']], float(v.text))
+            self.__nexsan_env_controller_voltage_good.add_metric(values + [v.attrib['id']], self.isgood(v))
 
-        g3 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_celsius', '', labels = labels + ['temp'])
-        g4 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_good', '', labels = labels + ['temp'])
         for t in controller.iterfind('./temperature_deg_c'):
-            g3.add_metric(values + [t.attrib['id']], float(t.text))
-            g4.add_metric(values + [t.attrib['id']], self.isgood(t))
-        yield g3
-        yield g4
+            self.__nexsan_env_controller_temp_celsius.add_metric(values + [t.attrib['id']], float(t.text))
+            self.__nexsan_env_controller_temp_good.add_metric(values + [t.attrib['id']], self.isgood(t))
 
-        g5 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_battery_charge_good', '', labels = labels + ['battery'])
         for b in controller.iterfind('./battery'):
-            g5.add_metric(values + [b.attrib['id']], self.isgood(b.find('./charge_state')))
-        yield g5
+            self.__nexsan_env_controller_battery_charge_good.add_metric(values + [b.attrib['id']], self.isgood(b.find('./charge_state')))

@@ -153,6 +153,32 @@ def test_collector_psu_blower_good(nexsan_psu):
         ('nexsan_env_psu_blower_good', {'psu': '2', 'enclosure': '1', 'blower': '4'}, 0),
     ] == mf.samples
 
+def test_collector_psu_multi():
+    nexsan_psu_multi = ET.fromstring('''
+      <nexsan_op_status version="2" status="experimental">
+        <nexsan_env_status version="3" status="experimental">
+          <enclosure id="1">
+            <psu id="2">
+              <state good="yes" power_watt="546">OK</state>
+              <temperature_deg_c good="yes">41</temperature_deg_c>
+              <blower_rpm id="3" good="yes">4444</blower_rpm>
+            </psu>
+            <psu id="9">
+              <state good="yes" power_watt="100">OK</state>
+              <temperature_deg_c good="yes">41</temperature_deg_c>
+              <blower_rpm id="3" good="yes">4444</blower_rpm>
+            </psu>
+          </enclosure>
+        </nexsan_env_status>
+      </nexsan_op_status>
+    ''')
+    c = nexsan.Collector(nexsan_psu_multi)
+    mf = getmf(c.collect(), 'nexsan_env_psu_power_good')
+    assert [
+        ('nexsan_env_psu_power_good', {'psu': '2', 'enclosure': '1'}, 1),
+        ('nexsan_env_psu_power_good', {'psu': '9', 'enclosure': '1'}, 1),
+    ] == mf.samples
+
 @pytest.fixture
 def nexsan_controller(request):
     return ET.fromstring('''
