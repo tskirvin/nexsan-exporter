@@ -210,3 +210,20 @@ def test_collector_controller_temp_good(nexsan_controller):
         ('nexsan_env_controller_temp_good', {'temp': 'PCB', 'controller': '2', 'enclosure': '1'}, 1),
         ('nexsan_env_controller_temp_good', {'temp': 'CPU', 'controller': '2', 'enclosure': '1'}, 0),
     ] == mf.samples
+
+def test_collector_controller_battery_charge_good_1(nexsan_controller):
+    c = nexsan.Collector(nexsan_controller)
+    mf = getmf(c.collect(), 'nexsan_env_controller_battery_charge_good')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_env_controller_battery_charge_good', {'battery': '3', 'controller': '2', 'enclosure': '1'}, 1),
+    ] == mf.samples
+
+def test_collector_controller_battery_charge_good_1(nexsan_controller):
+    nexsan_controller.find('.//controller/battery[@id="3"]/charge_state').attrib['good'] = 'no'
+    c = nexsan.Collector(nexsan_controller)
+    mf = getmf(c.collect(), 'nexsan_env_controller_battery_charge_good')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_env_controller_battery_charge_good', {'battery': '3', 'controller': '2', 'enclosure': '1'}, 0),
+    ] == mf.samples

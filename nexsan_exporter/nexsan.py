@@ -98,3 +98,8 @@ class Collector:
             g4.add_metric(values + [t.attrib['id']], self.isgood(t))
         yield g3
         yield g4
+
+        g5 = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_battery_charge_good', '', labels = labels + ['battery'])
+        for b in controller.iterfind('./battery'):
+            g5.add_metric(values + [b.attrib['id']], self.isgood(b.find('./charge_state')))
+        yield g5
