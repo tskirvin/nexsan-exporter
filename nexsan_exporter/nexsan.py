@@ -6,7 +6,7 @@ import urllib.parse
 
 from xml.etree import ElementTree
 
-import prometheus_client
+from prometheus_client.core import CounterMetricFamily, GaugeMetricFamily, UntypedMetricFamily
 
 def probe(target, user, pass_):
     '''
@@ -24,27 +24,27 @@ class Collector:
         self.__opstats = opstats
         self.__parent_map = {c: p for p in opstats.iter() for c in p}
 
-        self.__nexsan_sys_details = prometheus_client.core.UntypedMetricFamily('nexsan_sys_details', '', labels=['friendly_name', 'system_name', 'system_id', 'firmware_version'])
-        self.__nexsan_sys_date = prometheus_client.core.CounterMetricFamily('nexsan_sys_date', '')
-        self.__nexsan_env_psu_power_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_power_good', '', labels=['psu', 'enclosure'])
-        self.__nexsan_env_psu_power_watts = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_power_watts', '', labels=['psu', 'enclosure'])
-        self.__nexsan_env_psu_temp_celsius = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_temp_celsius', '', labels=['psu', 'enclosure'])
-        self.__nexsan_env_psu_temp_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_temp_good', '', labels=['psu', 'enclosure'])
-        self.__nexsan_env_psu_blower_rpm = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_blower_rpm', '', labels=['psu', 'enclosure', 'blower'])
-        self.__nexsan_env_psu_blower_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_psu_blower_good', '', labels=['psu', 'enclosure', 'blower'])
-        self.__nexsan_env_controller_voltage_volts = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_voltage_volts', '', labels=['controller', 'enclosure', 'voltage'])
-        self.__nexsan_env_controller_voltage_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_voltage_good', '', labels=['controller', 'enclosure', 'voltage'])
-        self.__nexsan_env_controller_temp_celsius = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_celsius', '', labels=['controller', 'enclosure', 'temp'])
-        self.__nexsan_env_controller_temp_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_good', '', labels=['controller', 'enclosure', 'temp'])
-        self.__nexsan_env_controller_battery_charge_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_battery_charge_good', '', labels=['controller', 'enclosure', 'battery'])
-        self.__nexsan_env_pod_voltage_volts = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_voltage_volts', '', labels=['pod', 'enclosure', 'voltage'])
-        self.__nexsan_env_pod_voltage_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_voltage_good', '', labels=['pod', 'enclosure', 'voltage'])
-        self.__nexsan_env_pod_temp_celsius = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_temp_celsius', '', labels=['pod', 'enclosure', 'temp'])
-        self.__nexsan_env_pod_temp_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_temp_good', '', labels=['pod', 'enclosure', 'temp'])
-        self.__nexsan_env_pod_front_blower_rpm = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_front_blower_rpm', '', labels=['pod', 'enclosure', 'blower'])
-        self.__nexsan_env_pod_front_blower_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_front_blower_good', '', labels=['pod', 'enclosure', 'blower'])
-        self.__nexsan_env_pod_tray_blower_rpm = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_tray_blower_rpm', '', labels=['pod', 'enclosure', 'blower'])
-        self.__nexsan_env_pod_tray_blower_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_tray_blower_good', '', labels=['pod', 'enclosure', 'blower'])
+        self.__nexsan_sys_details = UntypedMetricFamily('nexsan_sys_details', '', labels=['friendly_name', 'system_name', 'system_id', 'firmware_version'])
+        self.__nexsan_sys_date = CounterMetricFamily('nexsan_sys_date', '')
+        self.__nexsan_env_psu_power_good = GaugeMetricFamily('nexsan_env_psu_power_good', '', labels=['psu', 'enclosure'])
+        self.__nexsan_env_psu_power_watts = GaugeMetricFamily('nexsan_env_psu_power_watts', '', labels=['psu', 'enclosure'])
+        self.__nexsan_env_psu_temp_celsius = GaugeMetricFamily('nexsan_env_psu_temp_celsius', '', labels=['psu', 'enclosure'])
+        self.__nexsan_env_psu_temp_good = GaugeMetricFamily('nexsan_env_psu_temp_good', '', labels=['psu', 'enclosure'])
+        self.__nexsan_env_psu_blower_rpm = GaugeMetricFamily('nexsan_env_psu_blower_rpm', '', labels=['psu', 'enclosure', 'blower'])
+        self.__nexsan_env_psu_blower_good = GaugeMetricFamily('nexsan_env_psu_blower_good', '', labels=['psu', 'enclosure', 'blower'])
+        self.__nexsan_env_controller_voltage_volts = GaugeMetricFamily('nexsan_env_controller_voltage_volts', '', labels=['controller', 'enclosure', 'voltage'])
+        self.__nexsan_env_controller_voltage_good = GaugeMetricFamily('nexsan_env_controller_voltage_good', '', labels=['controller', 'enclosure', 'voltage'])
+        self.__nexsan_env_controller_temp_celsius = GaugeMetricFamily('nexsan_env_controller_temp_celsius', '', labels=['controller', 'enclosure', 'temp'])
+        self.__nexsan_env_controller_temp_good = GaugeMetricFamily('nexsan_env_controller_temp_good', '', labels=['controller', 'enclosure', 'temp'])
+        self.__nexsan_env_controller_battery_charge_good = GaugeMetricFamily('nexsan_env_controller_battery_charge_good', '', labels=['controller', 'enclosure', 'battery'])
+        self.__nexsan_env_pod_voltage_volts = GaugeMetricFamily('nexsan_env_pod_voltage_volts', '', labels=['pod', 'enclosure', 'voltage'])
+        self.__nexsan_env_pod_voltage_good = GaugeMetricFamily('nexsan_env_pod_voltage_good', '', labels=['pod', 'enclosure', 'voltage'])
+        self.__nexsan_env_pod_temp_celsius = GaugeMetricFamily('nexsan_env_pod_temp_celsius', '', labels=['pod', 'enclosure', 'temp'])
+        self.__nexsan_env_pod_temp_good = GaugeMetricFamily('nexsan_env_pod_temp_good', '', labels=['pod', 'enclosure', 'temp'])
+        self.__nexsan_env_pod_front_blower_rpm = GaugeMetricFamily('nexsan_env_pod_front_blower_rpm', '', labels=['pod', 'enclosure', 'blower'])
+        self.__nexsan_env_pod_front_blower_good = GaugeMetricFamily('nexsan_env_pod_front_blower_good', '', labels=['pod', 'enclosure', 'blower'])
+        self.__nexsan_env_pod_tray_blower_rpm = GaugeMetricFamily('nexsan_env_pod_tray_blower_rpm', '', labels=['pod', 'enclosure', 'blower'])
+        self.__nexsan_env_pod_tray_blower_good = GaugeMetricFamily('nexsan_env_pod_tray_blower_good', '', labels=['pod', 'enclosure', 'blower'])
 
     def isgood(self, elem):
         if elem.attrib['good'] == 'yes':
