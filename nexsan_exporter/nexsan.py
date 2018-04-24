@@ -50,6 +50,8 @@ class Collector:
         self.__nexsan_volume_ios_write_total = CounterMetricFamily('nexsan_volume_ios_write_total', '', labels=['volume', 'name', 'array', 'serial', 'ident', 'target', 'lun'])
         self.__nexsan_volume_blocks_read_total = CounterMetricFamily('nexsan_volume_blocks_read_total', '', labels=['volume', 'name', 'array', 'serial', 'ident', 'target', 'lun'])
         self.__nexsan_volume_blocks_write_total = CounterMetricFamily('nexsan_volume_blocks_write_total', '', labels=['volume', 'name', 'array', 'serial', 'ident', 'target', 'lun'])
+        self.__nexsan_perf_cpu_usage_percent = GaugeMetricFamily('nexsan_perf_cpu_usage_percent', '', labels=['controller'])
+        self.__nexsan_perf_memory_usage_percent = GaugeMetricFamily('nexsan_perf_memory_usage_percent', '', labels=['controller'])
 
     def isgood(self, elem):
         if elem.attrib['good'] == 'yes':
@@ -65,6 +67,8 @@ class Collector:
                 self.collect_env_status(child)
             elif child.tag == 'nexsan_volume_stats':
                 self.collect_volume_stats(child)
+            elif child.tag == 'nexsan_perf_status':
+                self.collect_perf_status(child)
 
         yield from (v for k, v in self.__dict__.items() if k.startswith('_Collector__nexsan_'))
 
@@ -135,8 +139,15 @@ class Collector:
         for path in volume.iterfind('./path'):
             path_values = values + [path.attrib['init_ident'], path.attrib['target_id'], path.attrib['lun']]
 
-            self.__nexsan_volume_ios_total.add_metric(path_values, int(path.find('./total_ios').text))
-            self.__nexsan_volume_ios_read_total.add_metric(path_values, int(path.find('./read_ios').text))
-            self.__nexsan_volume_ios_write_total.add_metric(path_values, int(path.find('./write_ios').text))
-            self.__nexsan_volume_blocks_read_total.add_metric(path_values, int(path.find('./read_blocks').text))
-            self.__nexsan_volume_blocks_write_total.add_metric(path_values, int(path.find('./write_blocks').text))
+            self.__nexsan_volume_ios_total.add_metric(path_values, int(path.findtext('./total_ios')))
+            self.__nexsan_volume_ios_read_total.add_metric(path_values, int(path.findtext('./read_ios')))
+            self.__nexsan_volume_ios_write_total.add_metric(path_values, int(path.findtext('./write_ios')))
+            self.__nexsan_volume_blocks_read_total.add_metric(path_values, int(path.findtext('./read_blocks')))
+            self.__nexsan_volume_blocks_write_total.add_metric(path_values, int(path.findtext('./write_blocks')))
+
+    def collect_perf_status(self, perf):
+        for controller in perf.iterfind('./controller'):
+            values = [controller.attrib['id']]
+
+            self.__nexsan_perf_cpu_usage_percent.add_metric(values, int(controller.findtext('./cpu_percent')))
+            self.__nexsan_perf_memory_usage_percent.add_metric(values, int(controller.findtext('./memory_percent')))

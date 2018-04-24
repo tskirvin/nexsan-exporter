@@ -503,3 +503,82 @@ def test_volume_weird(request):
     c = nexsan.Collector(nexsan_volume_weird)
     for mf in c.collect():
         assert [] == mf.samples
+
+@pytest.fixture
+def nexsan_perf(request):
+    return ET.fromstring('''
+      <nexsan_op_status version="2" status="experimental">
+        <nexsan_perf_status version="2" status="experimental">
+          <controller id="2">
+            <cpu_percent>16</cpu_percent>
+            <memory_percent>38</memory_percent>
+            <port name="Fibre - Host0">
+              <read_mbytes_per_sec>76</read_mbytes_per_sec>
+              <write_mbytes_per_sec>10</write_mbytes_per_sec>
+              <read_ios>2483933528</read_ios>
+              <write_ios>2118181371</write_ios>
+              <read_blocks>1511750808555</read_blocks>
+              <write_blocks>265523917855</write_blocks>
+              <port_resets>2</port_resets>
+              <lun_resets>0</lun_resets>
+              <!-- t 2 -->
+              <link_errors>
+                <link_error id="0" error_name="link_failure" count="9"/>
+                <link_error id="1" error_name="loss_of_sync" count="0"/>
+                <link_error id="2" error_name="loss_of_signal" count="0"/>
+                <link_error id="3" error_name="primitive_seq_errs" count="0"/>
+                <link_error id="4" error_name="invalid_tx_words" count="383"/>
+                <link_error id="5" error_name="invalid_tx_crcs" count="0"/>
+                <link_error id="6" error_name="discarded_frames" count="0"/>
+                <link_error id="7" error_name="fw_dropped_frames" count="0"/>
+              </link_errors>
+            </port>
+            <port name="Fibre - Host1">
+              <read_mbytes_per_sec>77</read_mbytes_per_sec>
+              <write_mbytes_per_sec>12</write_mbytes_per_sec>
+              <read_ios>2090888411</read_ios>
+              <write_ios>1644606275</write_ios>
+              <read_blocks>1291215959784</read_blocks>
+              <write_blocks>203110373427</write_blocks>
+              <port_resets>2</port_resets>
+              <lun_resets>0</lun_resets>
+              <!-- t 2 -->
+              <link_errors>
+                <link_error id="0" error_name="link_failure" count="4"/>
+                <link_error id="1" error_name="loss_of_sync" count="0"/>
+                <link_error id="2" error_name="loss_of_signal" count="0"/>
+                <link_error id="3" error_name="primitive_seq_errs" count="0"/>
+                <link_error id="4" error_name="invalid_tx_words" count="0"/>
+                <link_error id="5" error_name="invalid_tx_crcs" count="0"/>
+                <link_error id="6" error_name="discarded_frames" count="0"/>
+                <link_error id="7" error_name="fw_dropped_frames" count="0"/>
+              </link_errors>
+            </port>
+          </controller>
+          <array name="E60TRF01_SAS_R5_L1">
+            <owner>1</owner>
+            <load_percent>18</load_percent>
+          </array>
+          <array name="E60TRF01_SAS_R5_L2">
+            <owner>0</owner>
+            <load_percent>16</load_percent>
+          </array>
+        </nexsan_perf_status>
+      </nexsan_op_status>
+    ''')
+
+def test_collector_cpu_usage_ratio(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_cpu_usage_percent')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_perf_cpu_usage_percent', {'controller': '2'}, 16)
+    ] == mf.samples
+
+def test_collector_memory_usage_ratio(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_memory_usage_percent')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_perf_memory_usage_percent', {'controller': '2'}, 38)
+    ] == mf.samples
