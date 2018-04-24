@@ -395,3 +395,99 @@ def test_collector_pod_multi():
         ('nexsan_env_pod_voltage_good', {'pod': '4', 'enclosure': '5', 'voltage': 'Exp A 1V2'}, 1),
         ('nexsan_env_pod_voltage_good', {'pod': '5', 'enclosure': '5', 'voltage': 'Exp A 1V2'}, 1),
     ] == mf.samples
+
+@pytest.fixture
+def nexsan_volume(request):
+    return ET.fromstring('''
+      <nexsan_op_status version="2" status="experimental">
+        <nexsan_volume_stats version="1" status="experimental">
+          <volume id="1" name="v1" array="1" serial_number="0xA1B2C3D4">
+            <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="1">
+              <total_ios>42</total_ios>
+              <read_ios>0</read_ios>
+              <write_ios>20</write_ios>
+              <read_blocks>0</read_blocks>
+              <write_blocks>160</write_blocks>
+            </path>
+            <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="1">
+              <total_ios>9445479</total_ios>
+              <read_ios>4327880</read_ios>
+              <write_ios>5117461</write_ios>
+              <read_blocks>2782976761</read_blocks>
+              <write_blocks>502621356</write_blocks>
+            </path>
+          </volume>
+          <volume id="2" name="v2" array="2" serial_number="0xE5F6A7B8">
+            <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E1" target_id="13" lun="2">
+              <total_ios>271860997</total_ios>
+              <read_ios>1798</read_ios>
+              <write_ios>271857933</write_ios>
+              <read_blocks>1928</read_blocks>
+              <write_blocks>34797781261</write_blocks>
+            </path>
+            <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B1" target_id="2" lun="2">
+              <total_ios>79</total_ios>
+              <read_ios>1</read_ios>
+              <write_ios>9</write_ios>
+              <read_blocks>17</read_blocks>
+              <write_blocks>314</write_blocks>
+            </path>
+          </volume>
+        </nexsan_volume_stats>
+      </nexsan_op_status>
+      ''')
+
+def test_volume_ios_total(nexsan_volume):
+    c = nexsan.Collector(nexsan_volume)
+    mf = getmf(c.collect(), 'nexsan_volume_ios_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_volume_ios_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E0', 'target': '1', 'lun': '1'}, 42),
+        ('nexsan_volume_ios_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B0', 'target': '0', 'lun': '1'}, 9445479),
+        ('nexsan_volume_ios_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E1', 'target': '13', 'lun': '2'}, 271860997),
+        ('nexsan_volume_ios_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B1', 'target': '2', 'lun': '2'}, 79),
+    ] == mf.samples
+
+def test_volume_ios_read_total(nexsan_volume):
+    c = nexsan.Collector(nexsan_volume)
+    mf = getmf(c.collect(), 'nexsan_volume_ios_read_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_volume_ios_read_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E0', 'target': '1', 'lun': '1'}, 0),
+        ('nexsan_volume_ios_read_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B0', 'target': '0', 'lun': '1'}, 4327880),
+        ('nexsan_volume_ios_read_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E1', 'target': '13', 'lun': '2'}, 1798),
+        ('nexsan_volume_ios_read_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B1', 'target': '2', 'lun': '2'}, 1),
+    ] == mf.samples
+
+def test_volume_ios_write_total(nexsan_volume):
+    c = nexsan.Collector(nexsan_volume)
+    mf = getmf(c.collect(), 'nexsan_volume_ios_write_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_volume_ios_write_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E0', 'target': '1', 'lun': '1'}, 20),
+        ('nexsan_volume_ios_write_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B0', 'target': '0', 'lun': '1'}, 5117461),
+        ('nexsan_volume_ios_write_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E1', 'target': '13', 'lun': '2'}, 271857933),
+        ('nexsan_volume_ios_write_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B1', 'target': '2', 'lun': '2'}, 9),
+    ] == mf.samples
+
+def test_volume_blocks_read_total(nexsan_volume):
+    c = nexsan.Collector(nexsan_volume)
+    mf = getmf(c.collect(), 'nexsan_volume_blocks_read_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_volume_blocks_read_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E0', 'target': '1', 'lun': '1'}, 0),
+        ('nexsan_volume_blocks_read_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B0', 'target': '0', 'lun': '1'}, 2782976761),
+        ('nexsan_volume_blocks_read_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E1', 'target': '13', 'lun': '2'}, 1928),
+        ('nexsan_volume_blocks_read_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B1', 'target': '2', 'lun': '2'}, 17),
+    ] == mf.samples
+
+def test_volume_blocks_write_total(nexsan_volume):
+    c = nexsan.Collector(nexsan_volume)
+    mf = getmf(c.collect(), 'nexsan_volume_blocks_write_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_volume_blocks_write_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E0', 'target': '1', 'lun': '1'}, 160),
+        ('nexsan_volume_blocks_write_total', {'volume': '1', 'name': 'v1', 'array': '1', 'serial': '0xA1B2C3D4', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B0', 'target': '0', 'lun': '1'}, 502621356),
+        ('nexsan_volume_blocks_write_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E1', 'target': '13', 'lun': '2'}, 34797781261),
+        ('nexsan_volume_blocks_write_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B1', 'target': '2', 'lun': '2'}, 314),
+    ] == mf.samples

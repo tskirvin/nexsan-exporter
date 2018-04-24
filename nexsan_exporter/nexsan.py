@@ -45,6 +45,11 @@ class Collector:
         self.__nexsan_env_pod_front_blower_good = GaugeMetricFamily('nexsan_env_pod_front_blower_good', '', labels=['pod', 'enclosure', 'blower'])
         self.__nexsan_env_pod_tray_blower_rpm = GaugeMetricFamily('nexsan_env_pod_tray_blower_rpm', '', labels=['pod', 'enclosure', 'blower'])
         self.__nexsan_env_pod_tray_blower_good = GaugeMetricFamily('nexsan_env_pod_tray_blower_good', '', labels=['pod', 'enclosure', 'blower'])
+        self.__nexsan_volume_ios_total = CounterMetricFamily('nexsan_volume_ios_total', '', labels=['volume', 'name', 'array', 'serial', 'ident', 'target', 'lun'])
+        self.__nexsan_volume_ios_read_total = CounterMetricFamily('nexsan_volume_ios_read_total', '', labels=['volume', 'name', 'array', 'serial', 'ident', 'target', 'lun'])
+        self.__nexsan_volume_ios_write_total = CounterMetricFamily('nexsan_volume_ios_write_total', '', labels=['volume', 'name', 'array', 'serial', 'ident', 'target', 'lun'])
+        self.__nexsan_volume_blocks_read_total = CounterMetricFamily('nexsan_volume_blocks_read_total', '', labels=['volume', 'name', 'array', 'serial', 'ident', 'target', 'lun'])
+        self.__nexsan_volume_blocks_write_total = CounterMetricFamily('nexsan_volume_blocks_write_total', '', labels=['volume', 'name', 'array', 'serial', 'ident', 'target', 'lun'])
 
     def isgood(self, elem):
         if elem.attrib['good'] == 'yes':
@@ -58,6 +63,8 @@ class Collector:
                 self.collect_sys_details(child)
             elif child.tag == 'nexsan_env_status':
                 self.collect_env_status(child)
+            elif child.tag == 'nexsan_volume_stats':
+                self.collect_volume_stats(child)
 
         yield from (v for k, v in self.__dict__.items() if k.startswith('_Collector__nexsan_'))
 
@@ -117,3 +124,19 @@ class Collector:
         for b2 in pod.iterfind('./fan_tray/blower_rpm'):
             self.__nexsan_env_pod_tray_blower_rpm.add_metric(values + [b2.attrib['id']], float(b2.text))
             self.__nexsan_env_pod_tray_blower_good.add_metric(values + [b2.attrib['id']], self.isgood(b2))
+
+    def collect_volume_stats(self, volume_stats):
+        for volume in volume_stats.iterfind('./volume'):
+            self.collect_volume(volume)
+
+    def collect_volume(self, volume):
+        values = [volume.attrib['id'], volume.attrib['name'], volume.attrib['array'], volume.attrib['serial_number']]
+
+        for path in volume.iterfind('./path'):
+            path_values = values + [path.attrib['init_ident'], path.attrib['target_id'], path.attrib['lun']]
+
+            self.__nexsan_volume_ios_total.add_metric(path_values, int(path.find('./total_ios').text))
+            self.__nexsan_volume_ios_read_total.add_metric(path_values, int(path.find('./read_ios').text))
+            self.__nexsan_volume_ios_write_total.add_metric(path_values, int(path.find('./write_ios').text))
+            self.__nexsan_volume_blocks_read_total.add_metric(path_values, int(path.find('./read_blocks').text))
+            self.__nexsan_volume_blocks_write_total.add_metric(path_values, int(path.find('./write_blocks').text))
