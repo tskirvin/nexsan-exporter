@@ -491,3 +491,15 @@ def test_volume_blocks_write_total(nexsan_volume):
         ('nexsan_volume_blocks_write_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-BD-E1', 'target': '13', 'lun': '2'}, 34797781261),
         ('nexsan_volume_blocks_write_total', {'volume': '2', 'name': 'v2', 'array': '2', 'serial': '0xE5F6A7B8', 'ident': 'WWPN: 20-00-A1-B2-C3-1E-C1-B1', 'target': '2', 'lun': '2'}, 314),
     ] == mf.samples
+
+def test_volume_weird(request):
+    nexsan_volume_weird = ET.fromstring('''
+      <nexsan_op_status version="2" status="experimental">
+        <nexsan_volume_stats version="1" status="experimental">
+          <volume id="209" name="###SNAPDATA###" array="24" serial_number="0x70C09A20"></volume>
+        </nexsan_volume_stats>
+      </nexsan_op_status>
+    ''')
+    c = nexsan.Collector(nexsan_volume_weird)
+    for mf in c.collect():
+        assert [] == mf.samples
