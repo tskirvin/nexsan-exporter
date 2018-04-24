@@ -37,6 +37,14 @@ class Collector:
         self.__nexsan_env_controller_temp_celsius = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_celsius', '', labels=['controller', 'enclosure', 'temp'])
         self.__nexsan_env_controller_temp_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_temp_good', '', labels=['controller', 'enclosure', 'temp'])
         self.__nexsan_env_controller_battery_charge_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_controller_battery_charge_good', '', labels=['controller', 'enclosure', 'battery'])
+        self.__nexsan_env_pod_voltage_volts = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_voltage_volts', '', labels=['pod', 'enclosure', 'voltage'])
+        self.__nexsan_env_pod_voltage_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_voltage_good', '', labels=['pod', 'enclosure', 'voltage'])
+        self.__nexsan_env_pod_temp_celsius = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_temp_celsius', '', labels=['pod', 'enclosure', 'temp'])
+        self.__nexsan_env_pod_temp_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_temp_good', '', labels=['pod', 'enclosure', 'temp'])
+        self.__nexsan_env_pod_front_blower_rpm = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_front_blower_rpm', '', labels=['pod', 'enclosure', 'blower'])
+        self.__nexsan_env_pod_front_blower_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_front_blower_good', '', labels=['pod', 'enclosure', 'blower'])
+        self.__nexsan_env_pod_tray_blower_rpm = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_tray_blower_rpm', '', labels=['pod', 'enclosure', 'blower'])
+        self.__nexsan_env_pod_tray_blower_good = prometheus_client.core.GaugeMetricFamily('nexsan_env_pod_tray_blower_good', '', labels=['pod', 'enclosure', 'blower'])
 
     def isgood(self, elem):
         if elem.attrib['good'] == 'yes':
@@ -58,10 +66,12 @@ class Collector:
         self.__nexsan_sys_date.add_metric([], int(sys_details.findtext('./date')))
 
     def collect_env_status(self, env_status):
-        for p in env_status.iterfind('.//psu'):
-            self.collect_psu(p)
+        for psu in env_status.iterfind('.//psu'):
+            self.collect_psu(psu)
         for c in env_status.iterfind('.//controller'):
             self.collect_controller(c)
+        for pod in env_status.iterfind('.//pod'):
+            self.collect_pod(pod)
 
     def collect_psu(self, psu):
         values = [psu.attrib['id'], self.__parent_map[psu].attrib['id']]
@@ -88,3 +98,22 @@ class Collector:
 
         for b in controller.iterfind('./battery'):
             self.__nexsan_env_controller_battery_charge_good.add_metric(values + [b.attrib['id']], self.isgood(b.find('./charge_state')))
+
+    def collect_pod(self, pod):
+        values = [pod.attrib['id'], self.__parent_map[pod].attrib['id']]
+
+        for v in pod.iterfind('./voltage'):
+            self.__nexsan_env_pod_voltage_volts.add_metric(values + [v.attrib['id']], float(v.text))
+            self.__nexsan_env_pod_voltage_good.add_metric(values + [v.attrib['id']], self.isgood(v))
+
+        for t in pod.iterfind('./temperature_deg_c'):
+            self.__nexsan_env_pod_temp_celsius.add_metric(values + [t.attrib['id']], float(t.text))
+            self.__nexsan_env_pod_temp_good.add_metric(values + [t.attrib['id']], self.isgood(t))
+
+        for b1 in pod.iterfind('./front_panel/blower_rpm'):
+            self.__nexsan_env_pod_front_blower_rpm.add_metric(values + [b1.attrib['id']], float(b1.text))
+            self.__nexsan_env_pod_front_blower_good.add_metric(values + [b1.attrib['id']], self.isgood(b1))
+
+        for b2 in pod.iterfind('./fan_tray/blower_rpm'):
+            self.__nexsan_env_pod_tray_blower_rpm.add_metric(values + [b2.attrib['id']], float(b2.text))
+            self.__nexsan_env_pod_tray_blower_good.add_metric(values + [b2.attrib['id']], self.isgood(b2))
