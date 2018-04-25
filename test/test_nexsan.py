@@ -947,7 +947,8 @@ def test_nexsan_maid_fewer():
     # Just check that the missing elements don't cause an error
     list(c.collect())
 
-def test_probe():
+@pytest.fixture
+def probe_server():
     import http.server
     import base64
     class Handler(http.server.BaseHTTPRequestHandler):
@@ -984,10 +985,17 @@ def test_probe():
     import threading
     t = threading.Thread(target=functools.partial(server.serve_forever, 1), name='test_probe_server')
     t.start()
-    try:
-        target = '{}:{}'.format(*server.server_address)
-        c = nexsan.probe('{}:{}'.format(*server.server_address), 'testuser', 'testpass')
-        assert nexsan.Collector is type(c)
-    finally:
-        server.shutdown()
-        t.join()
+    # We need to wait for server to be ready, but there doesn't appear to be a
+    # way to do that, so...
+    import time
+    time.sleep(0.25)
+
+    yield server
+
+    server.shutdown()
+    t.join()
+
+def test_probe(probe_server):
+    target = '{}:{}'.format(*probe_server.server_address)
+    c = nexsan.probe(target, 'testuser', 'testpass')
+    assert nexsan.Collector is type(c)
