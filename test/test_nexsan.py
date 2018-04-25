@@ -29,7 +29,7 @@ def datadir(request):
     return test_dir
 
 @pytest.mark.xfail
-def test_collector_opstats1(datadir):
+def test_opstats1(datadir):
     with open(os.path.join(datadir, 'opstats1.xml')) as f:
         metrics = list(nexsan.Collector(ET.parse(f)).collect())
         from pprint import pprint
@@ -37,7 +37,7 @@ def test_collector_opstats1(datadir):
         assert [] == metrics
 
 @pytest.mark.xfail
-def test_collector_opstats2(datadir):
+def test_opstats2(datadir):
     with open(os.path.join(datadir, 'opstats2.xml')) as f:
         metrics = list(nexsan.Collector(ET.parse(f)).collect())
         from pprint import pprint
@@ -67,13 +67,13 @@ def nexsan_sys(request):
         </nexsan_op_status>
     ''')
 
-def test_collector_sys_details(nexsan_sys):
+def test_sys_details(nexsan_sys):
     c = nexsan.Collector(nexsan_sys)
     mf = getmf(c.collect(), 'nexsan_sys_details')
     assert 'untyped' == mf.type
     assert [('nexsan_sys_details', {'firmware_version': 'fff', 'friendly_name': 'nnn', 'system_id': 'iii', 'system_name': 'sss'}, 1)] == mf.samples
 
-def test_collector_sys_date(nexsan_sys):
+def test_sys_date(nexsan_sys):
     c = nexsan.Collector(nexsan_sys)
     mf = getmf(c.collect(), 'nexsan_sys_date')
     assert 'counter' == mf.type
@@ -96,45 +96,45 @@ def nexsan_psu(request):
       </nexsan_op_status>
     ''')
 
-def test_collector_psu_power_good_1(nexsan_psu):
+def test_psu_power_good_1(nexsan_psu):
     c = nexsan.Collector(nexsan_psu)
     mf = getmf(c.collect(), 'nexsan_env_psu_power_good')
     assert 'gauge' == mf.type
     assert [('nexsan_env_psu_power_good', {'psu': '2', 'enclosure': '1'}, 1)] == mf.samples
 
-def test_collector_psu_power_good_0(nexsan_psu):
+def test_psu_power_good_0(nexsan_psu):
     nexsan_psu.find('.//psu/state').attrib['good'] = 'no'
     c = nexsan.Collector(nexsan_psu)
     mf = getmf(c.collect(), 'nexsan_env_psu_power_good')
     assert 'gauge' == mf.type
     assert [('nexsan_env_psu_power_good', {'psu': '2', 'enclosure': '1'}, 0)] == mf.samples
 
-def test_collector_psu_power_watts(nexsan_psu):
+def test_psu_power_watts(nexsan_psu):
     c = nexsan.Collector(nexsan_psu)
     mf = getmf(c.collect(), 'nexsan_env_psu_power_watts')
     assert 'gauge' == mf.type
     assert [('nexsan_env_psu_power_watts', {'psu': '2', 'enclosure': '1'}, 546)] == mf.samples
 
-def test_collector_psu_temp_celsius(nexsan_psu):
+def test_psu_temp_celsius(nexsan_psu):
     c = nexsan.Collector(nexsan_psu)
     mf = getmf(c.collect(), 'nexsan_env_psu_temp_celsius')
     assert 'gauge' == mf.type
     assert [('nexsan_env_psu_temp_celsius', {'psu': '2', 'enclosure': '1'}, 41)] == mf.samples
 
-def test_collector_psu_temp_good_1(nexsan_psu):
+def test_psu_temp_good_1(nexsan_psu):
     c = nexsan.Collector(nexsan_psu)
     mf = getmf(c.collect(), 'nexsan_env_psu_temp_good')
     assert 'gauge' == mf.type
     assert [('nexsan_env_psu_temp_good', {'psu': '2', 'enclosure': '1'}, 1)] == mf.samples
 
-def test_collector_psu_temp_good_0(nexsan_psu):
+def test_psu_temp_good_0(nexsan_psu):
     nexsan_psu.find('.//psu/temperature_deg_c').attrib['good'] = 'no'
     c = nexsan.Collector(nexsan_psu)
     mf = getmf(c.collect(), 'nexsan_env_psu_temp_good')
     assert 'gauge' == mf.type
     assert [('nexsan_env_psu_temp_good', {'psu': '2', 'enclosure': '1'}, 0)] == mf.samples
 
-def test_collector_psu_blower_rpm(nexsan_psu):
+def test_psu_blower_rpm(nexsan_psu):
     c = nexsan.Collector(nexsan_psu)
     mf = getmf(c.collect(), 'nexsan_env_psu_blower_rpm')
     assert 'gauge' == mf.type
@@ -143,7 +143,7 @@ def test_collector_psu_blower_rpm(nexsan_psu):
         ('nexsan_env_psu_blower_rpm', {'psu': '2', 'enclosure': '1', 'blower': '4'}, 7777),
     ] == mf.samples
 
-def test_collector_psu_blower_good(nexsan_psu):
+def test_psu_blower_good(nexsan_psu):
     nexsan_psu.find('.//psu/blower_rpm[@id="4"]').attrib['good'] = 'no'
     c = nexsan.Collector(nexsan_psu)
     mf = getmf(c.collect(), 'nexsan_env_psu_blower_good')
@@ -153,7 +153,7 @@ def test_collector_psu_blower_good(nexsan_psu):
         ('nexsan_env_psu_blower_good', {'psu': '2', 'enclosure': '1', 'blower': '4'}, 0),
     ] == mf.samples
 
-def test_collector_psu_multi():
+def test_psu_multi():
     nexsan_psu_multi = ET.fromstring('''
       <nexsan_op_status version="2" status="experimental">
         <nexsan_env_status version="3" status="experimental">
@@ -199,7 +199,7 @@ def nexsan_controller(request):
       </nexsan_op_status>
     ''')
 
-def test_collector_controller_voltage_volts(nexsan_controller):
+def test_controller_voltage_volts(nexsan_controller):
     c = nexsan.Collector(nexsan_controller)
     mf = getmf(c.collect(), 'nexsan_env_controller_voltage_volts')
     assert 'gauge' == mf.type
@@ -208,7 +208,7 @@ def test_collector_controller_voltage_volts(nexsan_controller):
         ('nexsan_env_controller_voltage_volts', {'voltage': '1V0', 'controller': '2', 'enclosure': '1'}, 0.97),
     ] == mf.samples
 
-def test_collector_controller_voltage_good(nexsan_controller):
+def test_controller_voltage_good(nexsan_controller):
     nexsan_controller.find('.//controller/voltage[@id="1V0"]').attrib['good'] = 'no'
     c = nexsan.Collector(nexsan_controller)
     mf = getmf(c.collect(), 'nexsan_env_controller_voltage_good')
@@ -218,7 +218,7 @@ def test_collector_controller_voltage_good(nexsan_controller):
         ('nexsan_env_controller_voltage_good', {'voltage': '1V0', 'controller': '2', 'enclosure': '1'}, 0),
     ] == mf.samples
 
-def test_collector_controller_temp_celsius(nexsan_controller):
+def test_controller_temp_celsius(nexsan_controller):
     c = nexsan.Collector(nexsan_controller)
     mf = getmf(c.collect(), 'nexsan_env_controller_temp_celsius')
     assert 'gauge' == mf.type
@@ -227,7 +227,7 @@ def test_collector_controller_temp_celsius(nexsan_controller):
         ('nexsan_env_controller_temp_celsius', {'temp': 'CPU', 'controller': '2', 'enclosure': '1'}, 74),
     ] == mf.samples
 
-def test_collector_controller_temp_good(nexsan_controller):
+def test_controller_temp_good(nexsan_controller):
     nexsan_controller.find('.//controller/temperature_deg_c[@id="CPU"]').attrib['good'] = 'no'
     c = nexsan.Collector(nexsan_controller)
     mf = getmf(c.collect(), 'nexsan_env_controller_temp_good')
@@ -237,7 +237,7 @@ def test_collector_controller_temp_good(nexsan_controller):
         ('nexsan_env_controller_temp_good', {'temp': 'CPU', 'controller': '2', 'enclosure': '1'}, 0),
     ] == mf.samples
 
-def test_collector_controller_battery_charge_good_1(nexsan_controller):
+def test_controller_battery_charge_good_1(nexsan_controller):
     c = nexsan.Collector(nexsan_controller)
     mf = getmf(c.collect(), 'nexsan_env_controller_battery_charge_good')
     assert 'gauge' == mf.type
@@ -245,7 +245,7 @@ def test_collector_controller_battery_charge_good_1(nexsan_controller):
         ('nexsan_env_controller_battery_charge_good', {'battery': '3', 'controller': '2', 'enclosure': '1'}, 1),
     ] == mf.samples
 
-def test_collector_controller_battery_charge_good_1(nexsan_controller):
+def test_controller_battery_charge_good_1(nexsan_controller):
     nexsan_controller.find('.//controller/battery[@id="3"]/charge_state').attrib['good'] = 'no'
     c = nexsan.Collector(nexsan_controller)
     mf = getmf(c.collect(), 'nexsan_env_controller_battery_charge_good')
@@ -254,7 +254,7 @@ def test_collector_controller_battery_charge_good_1(nexsan_controller):
         ('nexsan_env_controller_battery_charge_good', {'battery': '3', 'controller': '2', 'enclosure': '1'}, 0),
     ] == mf.samples
 
-def test_collector_controller_multi():
+def test_controller_multi():
     nexsan_psu_multi = ET.fromstring('''
       <nexsan_op_status version="2" status="experimental">
         <nexsan_env_status version="3" status="experimental">
@@ -301,7 +301,7 @@ def nexsan_pod():
       </nexsan_op_status>
     ''')
 
-def test_collector_pod_voltage_volts(nexsan_pod):
+def test_pod_voltage_volts(nexsan_pod):
     c = nexsan.Collector(nexsan_pod)
     mf = getmf(c.collect(), 'nexsan_env_pod_voltage_volts')
     assert 'gauge' == mf.type
@@ -310,7 +310,7 @@ def test_collector_pod_voltage_volts(nexsan_pod):
         ('nexsan_env_pod_voltage_volts', {'pod': '4', 'enclosure': '5', 'voltage': 'Exp B 1V2'}, 1.3),
     ]
 
-def test_collector_pod_voltage_good(nexsan_pod):
+def test_pod_voltage_good(nexsan_pod):
     c = nexsan.Collector(nexsan_pod)
     mf = getmf(c.collect(), 'nexsan_env_pod_voltage_good')
     assert 'gauge' == mf.type
@@ -319,7 +319,7 @@ def test_collector_pod_voltage_good(nexsan_pod):
         ('nexsan_env_pod_voltage_good', {'pod': '4', 'enclosure': '5', 'voltage': 'Exp B 1V2'}, 0),
     ] == mf.samples
 
-def test_collector_pod_temp_celsius(nexsan_pod):
+def test_pod_temp_celsius(nexsan_pod):
     c = nexsan.Collector(nexsan_pod)
     mf = getmf(c.collect(), 'nexsan_env_pod_temp_celsius')
     assert 'gauge' == mf.type
@@ -328,7 +328,7 @@ def test_collector_pod_temp_celsius(nexsan_pod):
         ('nexsan_env_pod_temp_celsius', {'pod': '4', 'enclosure': '5', 'temp': 'Expander B'}, 62),
     ] == mf.samples
 
-def test_collector_pod_temp_good(nexsan_pod):
+def test_pod_temp_good(nexsan_pod):
     c = nexsan.Collector(nexsan_pod)
     mf = getmf(c.collect(), 'nexsan_env_pod_temp_good')
     assert 'gauge' == mf.type
@@ -337,7 +337,7 @@ def test_collector_pod_temp_good(nexsan_pod):
         ('nexsan_env_pod_temp_good', {'pod': '4', 'enclosure': '5', 'temp': 'Expander B'}, 0),
     ] == mf.samples
 
-def test_collector_pod_front_blower_rpm(nexsan_pod):
+def test_pod_front_blower_rpm(nexsan_pod):
     c = nexsan.Collector(nexsan_pod)
     mf = getmf(c.collect(), 'nexsan_env_pod_front_blower_rpm')
     assert 'gauge' == mf.type
@@ -346,7 +346,7 @@ def test_collector_pod_front_blower_rpm(nexsan_pod):
         ('nexsan_env_pod_front_blower_rpm', {'pod': '4', 'enclosure': '5', 'blower': '2'}, 4200),
     ] == mf.samples
 
-def test_collector_pod_front_blower_good(nexsan_pod):
+def test_pod_front_blower_good(nexsan_pod):
     c = nexsan.Collector(nexsan_pod)
     mf = getmf(c.collect(), 'nexsan_env_pod_front_blower_good')
     assert 'gauge' == mf.type
@@ -355,7 +355,7 @@ def test_collector_pod_front_blower_good(nexsan_pod):
         ('nexsan_env_pod_front_blower_good', {'pod': '4', 'enclosure': '5', 'blower': '2'}, 0),
     ] == mf.samples
 
-def test_collector_pod_tray_blower_rpm(nexsan_pod):
+def test_pod_tray_blower_rpm(nexsan_pod):
     c = nexsan.Collector(nexsan_pod)
     mf = getmf(c.collect(), 'nexsan_env_pod_tray_blower_rpm')
     assert 'gauge' == mf.type
@@ -364,7 +364,7 @@ def test_collector_pod_tray_blower_rpm(nexsan_pod):
         ('nexsan_env_pod_tray_blower_rpm', {'pod': '4', 'enclosure': '5', 'blower': '8'}, 13138),
     ] == mf.samples
 
-def test_collector_pod_tray_blower_good(nexsan_pod):
+def test_pod_tray_blower_good(nexsan_pod):
     c = nexsan.Collector(nexsan_pod)
     mf = getmf(c.collect(), 'nexsan_env_pod_tray_blower_good')
     assert 'gauge' == mf.type
@@ -374,7 +374,7 @@ def test_collector_pod_tray_blower_good(nexsan_pod):
     ] == mf.samples
 
 
-def test_collector_pod_multi():
+def test_pod_multi():
     nexsan_psu_multi = ET.fromstring('''
       <nexsan_op_status version="2" status="experimental">
         <nexsan_env_status version="3" status="experimental">
@@ -567,7 +567,7 @@ def nexsan_perf(request):
       </nexsan_op_status>
     ''')
 
-def test_collector_cpu_usage_ratio(nexsan_perf):
+def test_perf_cpu_usage_ratio(nexsan_perf):
     c = nexsan.Collector(nexsan_perf)
     mf = getmf(c.collect(), 'nexsan_perf_cpu_usage_percent')
     assert 'gauge' == mf.type
@@ -575,7 +575,7 @@ def test_collector_cpu_usage_ratio(nexsan_perf):
         ('nexsan_perf_cpu_usage_percent', {'controller': '2'}, 16)
     ] == mf.samples
 
-def test_collector_memory_usage_ratio(nexsan_perf):
+def test_memory_usage_ratio(nexsan_perf):
     c = nexsan.Collector(nexsan_perf)
     mf = getmf(c.collect(), 'nexsan_perf_memory_usage_percent')
     assert 'gauge' == mf.type
