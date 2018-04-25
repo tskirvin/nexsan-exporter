@@ -60,7 +60,7 @@ def nexsan_sys(request):
 def test_sys_details(nexsan_sys):
     c = nexsan.Collector(nexsan_sys)
     mf = getmf(c.collect(), 'nexsan_sys_details')
-    assert 'untyped' == mf.type
+    assert 'gauge' == mf.type
     assert [('nexsan_sys_details', {'firmware_version': 'fff', 'friendly_name': 'nnn', 'system_id': 'iii', 'system_name': 'sss'}, 1)] == mf.samples
 
 def test_sys_date(nexsan_sys):

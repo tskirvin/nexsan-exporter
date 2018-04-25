@@ -3,7 +3,7 @@ import urllib.parse
 
 from xml.etree import ElementTree
 
-from prometheus_client.core import CounterMetricFamily, GaugeMetricFamily, UntypedMetricFamily
+from prometheus_client.core import CounterMetricFamily, GaugeMetricFamily
 
 def probe(target, user, pass_):
     '''
@@ -23,7 +23,7 @@ class Collector:
         self.__opstats = opstats
         self.__parent_map = {c: p for p in opstats.iter() for c in p}
 
-        self.__nexsan_sys_details = UntypedMetricFamily('nexsan_sys_details', '', labels=['friendly_name', 'system_name', 'system_id', 'firmware_version'])
+        self.__nexsan_sys_details = GaugeMetricFamily('nexsan_sys_details', '', labels=['friendly_name', 'system_name', 'system_id', 'firmware_version'])
         self.__nexsan_sys_date = CounterMetricFamily('nexsan_sys_date', '')
         self.__nexsan_env_psu_power_good = GaugeMetricFamily('nexsan_env_psu_power_good', '', labels=['psu', 'enclosure'])
         self.__nexsan_env_psu_power_watts = GaugeMetricFamily('nexsan_env_psu_power_watts', '', labels=['psu', 'enclosure'])
