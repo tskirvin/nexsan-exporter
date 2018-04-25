@@ -94,11 +94,21 @@ class Collector:
             self.collect_pod(pod)
 
     def collect_psu(self, psu):
-        values = [psu.attrib['id'], self.__parent_map[psu].attrib['id']]
+        parent = self.__parent_map[psu]
+        values = [psu.attrib['id'], parent.attrib['id'] if parent.tag == 'enclosure' else '']
 
         self.__nexsan_env_psu_power_good.add_metric(values, self.isgood(psu.find('./state')))
-        self.__nexsan_env_psu_power_watts.add_metric(values, int(psu.find('./state').attrib['power_watt']))
-        self.__nexsan_env_psu_temp_celsius.add_metric(values, int(psu.find('./temperature_deg_c').text))
+        state = psu.find('./state')
+        if 'power_watt' in state.attrib:
+            self.__nexsan_env_psu_power_watts.add_metric(values, int(state.attrib['power_watt']))
+
+        try:
+            x = int(psu.find('./temperature_deg_c').text)
+        except ValueError:
+            pass
+        else:
+            self.__nexsan_env_psu_temp_celsius.add_metric(values, x)
+
         self.__nexsan_env_psu_temp_good.add_metric(values, self.isgood(psu.find('./temperature_deg_c')))
 
         for b in psu.iterfind('./blower_rpm'):
@@ -106,15 +116,16 @@ class Collector:
             self.__nexsan_env_psu_blower_good.add_metric(values + [b.attrib['id']], self.isgood(b))
 
     def collect_controller(self, controller):
-        values = [controller.attrib['id'], self.__parent_map[controller].attrib['id']]
+        parent = self.__parent_map[controller]
+        values = [controller.attrib['id'], parent.attrib['id'] if parent.tag == 'enclosure' else '']
 
         for v in controller.iterfind('./voltage'):
             self.__nexsan_env_controller_voltage_volts.add_metric(values + [v.attrib['id']], float(v.text))
             self.__nexsan_env_controller_voltage_good.add_metric(values + [v.attrib['id']], self.isgood(v))
 
         for t in controller.iterfind('./temperature_deg_c'):
-            self.__nexsan_env_controller_temp_celsius.add_metric(values + [t.attrib['id']], float(t.text))
-            self.__nexsan_env_controller_temp_good.add_metric(values + [t.attrib['id']], self.isgood(t))
+            self.__nexsan_env_controller_temp_celsius.add_metric(values + [t.attrib.get('id', '')], float(t.text))
+            self.__nexsan_env_controller_temp_good.add_metric(values + [t.attrib.get('id', '')], self.isgood(t))
 
         for b in controller.iterfind('./battery'):
             self.__nexsan_env_controller_battery_charge_good.add_metric(values + [b.attrib['id']], self.isgood(b.find('./charge_state')))
@@ -184,4 +195,6 @@ class Collector:
 
         for group in maid.iterfind('./maid_group'):
             for x in ['active', 'idle', 'slow', 'stopped', 'off', 'standby', 'efficiency']:
-                getattr(self, '_Collector__nexsan_maid_{}_ratio'.format(x)).add_metric([group.attrib['name']], int(group.findtext('./{}_percent'.format(x)))/100)
+                elem = group.findtext('./{}_percent'.format(x))
+                if elem is not None:
+                    getattr(self, '_Collector__nexsan_maid_{}_ratio'.format(x)).add_metric([group.attrib['name']], int(elem)/100)

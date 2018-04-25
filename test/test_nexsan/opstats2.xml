@@ -1,0 +1,220 @@
+<?xml version="1.0"?>
+<!-- This is EXPERIMENTAL and as such, subject to change/removal without notice -->
+<nexsan_op_status version="1" status="experimental">
+  <nexsan_sys_details version="1" status="experimental">
+    <friendly_name>Nexsan Name</friendly_name>
+    <system_name>E60</system_name>
+    <system_id>XXXXXXX</system_id>
+    <firmware_version>Q011.1044</firmware_version>
+    <date human="Wednesday 22-Aug-2012 16:00">1345651206</date>
+  </nexsan_sys_details>
+  <nexsan_env_status version="1" status="experimental">
+    <psu id="0">
+      <state good="yes">OK</state>
+      <temperature_deg_c good="yes">26</temperature_deg_c>
+      <blower_rpm id="0" good="yes">6129</blower_rpm>
+      <blower_rpm id="1" good="yes">5875</blower_rpm>
+      <blower_rpm id="2" good="yes">6405</blower_rpm>
+      <blower_rpm id="3" good="yes">6405</blower_rpm>
+    </psu>
+    <psu id="1">
+      <state good="yes">OK</state>
+      <temperature_deg_c good="undef">Unknown</temperature_deg_c>
+      <blower_rpm id="0" good="yes">9782</blower_rpm>
+      <blower_rpm id="1" good="yes">9926</blower_rpm>
+      <blower_rpm id="2" good="yes">10444</blower_rpm>
+      <blower_rpm id="3" good="yes">10444</blower_rpm>
+    </psu>
+    <front_panel>
+      <blower_rpm id="0" good="yes">1938</blower_rpm>
+    </front_panel>
+    <fan_tray>
+      <blower_rpm id="0" good="yes">6750</blower_rpm>
+      <blower_rpm id="1" good="yes">4651</blower_rpm>
+      <blower_rpm id="2" good="yes">6498</blower_rpm>
+      <blower_rpm id="3" good="yes">4931</blower_rpm>
+    </fan_tray>
+    <controller id="0">
+      <voltage id="12V" good="yes">12.12</voltage>
+      <voltage id="5V0" good="yes">5.05</voltage>
+      <voltage id="3V3" good="yes">3.28</voltage>
+      <voltage id="2V5" good="yes">2.57</voltage>
+      <voltage id="1V8" good="yes">1.79</voltage>
+      <voltage id="1V2" good="yes">1.19</voltage>
+      <voltage id="1V1" good="yes">1.06</voltage>
+      <voltage id="1V0" good="yes">0.97</voltage>
+      <temperature_deg_c good="yes">29</temperature_deg_c>
+      <battery id="0">
+        <charge_state good="yes">Fully charged</charge_state>
+      </battery>
+    </controller>
+    <controller id="1">
+      <voltage id="12V" good="yes">12.06</voltage>
+      <voltage id="5V0" good="yes">5.05</voltage>
+      <voltage id="3V3" good="yes">3.28</voltage>
+      <voltage id="2V5" good="yes">2.59</voltage>
+      <voltage id="1V8" good="yes">1.79</voltage>
+      <voltage id="1V2" good="yes">1.19</voltage>
+      <voltage id="1V1" good="yes">1.06</voltage>
+      <voltage id="1V0" good="yes">0.97</voltage>
+      <temperature_deg_c good="yes">38</temperature_deg_c>
+      <battery id="0">
+        <charge_state good="yes">Fully charged</charge_state>
+      </battery>
+    </controller>
+  </nexsan_env_status>
+  <nexsan_perf_status version="1" status="experimental">
+    <controller id="0">
+      <cpu_percent>0</cpu_percent>
+      <memory_percent>30</memory_percent>
+      <port name="SAS - Host0">
+        <read_mbytes_per_sec>1</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>763406389</read_ios>
+        <write_ios>147963935</write_ios>
+        <read_blocks>39233187015</read_blocks>
+        <write_blocks>19211149040</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+      </port>
+      <port name="SAS - Host1">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>327023</read_ios>
+        <write_ios>1564615</write_ios>
+        <read_blocks>67918932</read_blocks>
+        <write_blocks>919304928</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+      </port>
+      <port name="1Ge-iSCSI - Net0">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+      </port>
+      <port name="1Ge-iSCSI - Net1">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+      </port>
+    </controller>
+    <controller id="1">
+      <cpu_percent>0</cpu_percent>
+      <memory_percent>27</memory_percent>
+      <port name="SAS - Host0">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>1</write_mbytes_per_sec>
+        <read_ios>150965880</read_ios>
+        <write_ios>32278450</write_ios>
+        <read_blocks>19458096455</read_blocks>
+        <write_blocks>6079147856</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+      </port>
+      <port name="SAS - Host1">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>7423</read_ios>
+        <write_ios>49</write_ios>
+        <read_blocks>59846</read_blocks>
+        <write_blocks>4000</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+      </port>
+      <port name="1Ge-iSCSI - Net0">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+      </port>
+      <port name="1Ge-iSCSI - Net1">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+      </port>
+    </controller>
+    <array name="array1">
+      <owner>0</owner>
+      <load_percent>0</load_percent>
+    </array>
+    <array name="array2">
+      <owner>1</owner>
+      <load_percent>0</load_percent>
+    </array>
+    <array name="array3">
+      <owner>1</owner>
+      <load_percent>0</load_percent>
+    </array>
+    <array name="array4">
+      <owner>0</owner>
+      <load_percent>0</load_percent>
+    </array>
+  </nexsan_perf_status>
+  <nexsan_maid_stats version="2" status="experimental">
+    <maid_state>enabled</maid_state>
+    <maid_stats_status good="yes">Valid and available</maid_stats_status>
+    <maid_group name="array1">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="array2">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="array3">
+      <active_percent>44</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>1</slow_percent>
+      <stopped_percent>55</stopped_percent>
+      <off_percent>0</off_percent>
+      <efficiency_percent>42</efficiency_percent>
+    </maid_group>
+    <maid_group name="array4">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="TOTAL">
+      <active_percent>77</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>23</stopped_percent>
+      <off_percent>0</off_percent>
+      <efficiency_percent>17</efficiency_percent>
+    </maid_group>
+    <reporting_period>
+      <start_date human="Friday 17-Aug-2012 13:55">1345211756</start_date>
+      <end_date human="Wednesday 22-Aug-2012 16:00">1345651206</end_date>
+    </reporting_period>
+  </nexsan_maid_stats>
+</nexsan_op_status>

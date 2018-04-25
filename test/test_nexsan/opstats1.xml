@@ -1,0 +1,1670 @@
+<?xml version="1.0"?>
+<!-- This is EXPERIMENTAL and as such, subject to change/removal without notice -->
+<nexsan_op_status version="2" status="experimental">
+  <nexsan_sys_details version="1" status="experimental">
+    <friendly_name>Some Name</friendly_name>
+    <system_name>E60</system_name>
+    <system_id>A1B2C3D4</system_id>
+    <firmware_version>Q010.1701.2</firmware_version>
+    <date human="Tuesday 17-Apr-2018 11:07">1523963221</date>
+  </nexsan_sys_details>
+  <nexsan_env_status version="3" status="experimental">
+    <enclosure id="0">
+      <psu id="0">
+        <state good="yes" power_watt="546">OK</state>
+        <temperature_deg_c good="yes">41</temperature_deg_c>
+        <blower_rpm id="0" good="yes">14438</blower_rpm>
+        <blower_rpm id="1" good="yes">14210</blower_rpm>
+        <blower_rpm id="2" good="yes">14210</blower_rpm>
+        <blower_rpm id="3" good="yes">14210</blower_rpm>
+      </psu>
+      <psu id="1">
+        <state good="yes" power_watt="547">OK</state>
+        <temperature_deg_c good="yes">42</temperature_deg_c>
+        <blower_rpm id="0" good="yes">14173</blower_rpm>
+        <blower_rpm id="1" good="yes">14673</blower_rpm>
+        <blower_rpm id="2" good="yes">14477</blower_rpm>
+        <blower_rpm id="3" good="yes">14477</blower_rpm>
+      </psu>
+      <controller id="0">
+        <voltage id="CPU" good="yes">1.18</voltage>
+        <voltage id="1V0" good="yes">0.97</voltage>
+        <voltage id="1V1" good="yes">1.06</voltage>
+        <voltage id="1V2" good="yes">1.18</voltage>
+        <voltage id="1V8" good="yes">1.79</voltage>
+        <voltage id="2V5" good="yes">2.56</voltage>
+        <voltage id="3V3" good="yes">3.26</voltage>
+        <voltage id="5V0" good="yes">5.05</voltage>
+        <voltage id="12V" good="yes">12.12</voltage>
+        <temperature_deg_c id="PCB" good="yes">44</temperature_deg_c>
+        <temperature_deg_c id="CPU" good="yes">74</temperature_deg_c>
+        <temperature_deg_c id="SAS" good="yes">59</temperature_deg_c>
+        <temperature_deg_c id="EXP" good="yes">60</temperature_deg_c>
+        <battery id="0">
+          <charge_state good="yes">Fully charged</charge_state>
+        </battery>
+      </controller>
+      <controller id="1">
+        <voltage id="CPU" good="yes">1.18</voltage>
+        <voltage id="1V0" good="yes">0.97</voltage>
+        <voltage id="1V1" good="yes">1.09</voltage>
+        <voltage id="1V2" good="yes">1.18</voltage>
+        <voltage id="1V8" good="yes">1.79</voltage>
+        <voltage id="2V5" good="yes">2.57</voltage>
+        <voltage id="3V3" good="yes">3.28</voltage>
+        <voltage id="5V0" good="yes">5.05</voltage>
+        <voltage id="12V" good="yes">12.12</voltage>
+        <temperature_deg_c id="PCB" good="yes">44</temperature_deg_c>
+        <temperature_deg_c id="CPU" good="yes">73</temperature_deg_c>
+        <temperature_deg_c id="SAS" good="yes">56</temperature_deg_c>
+        <temperature_deg_c id="EXP" good="yes">58</temperature_deg_c>
+        <battery id="0">
+          <charge_state good="yes">Fully charged</charge_state>
+        </battery>
+      </controller>
+      <pod id="0">
+        <voltage id="Exp A 1V2" good="yes">1.20</voltage>
+        <voltage id="Exp B 1V2" good="yes">1.20</voltage>
+        <voltage id="Exp A 3V3" good="yes">3.25</voltage>
+        <voltage id="Exp B 3V3" good="yes">3.28</voltage>
+        <voltage id="Stdby A 3V3" good="yes">3.16</voltage>
+        <voltage id="Stdby B 3V3" good="yes">3.16</voltage>
+        <voltage id="Shared 3V3" good="yes">3.21</voltage>
+        <voltage id="12V" good="yes">12.00</voltage>
+        <temperature_deg_c id="Expander A" good="yes">61</temperature_deg_c>
+        <temperature_deg_c id="Expander B" good="yes">61</temperature_deg_c>
+        <front_panel>
+          <blower_rpm id="0" good="yes">4163</blower_rpm>
+        </front_panel>
+        <fan_tray>
+          <blower_rpm id="0" good="yes">7616</blower_rpm>
+          <blower_rpm id="1" good="yes">13138</blower_rpm>
+          <blower_rpm id="2" good="yes">7736</blower_rpm>
+          <blower_rpm id="3" good="yes">12646</blower_rpm>
+        </fan_tray>
+      </pod>
+      <pod id="1">
+        <voltage id="Exp A 1V2" good="yes">1.20</voltage>
+        <voltage id="Exp B 1V2" good="yes">1.21</voltage>
+        <voltage id="Exp A 3V3" good="yes">3.25</voltage>
+        <voltage id="Exp B 3V3" good="yes">3.28</voltage>
+        <voltage id="Stdby A 3V3" good="yes">3.17</voltage>
+        <voltage id="Stdby B 3V3" good="yes">3.17</voltage>
+        <voltage id="Shared 3V3" good="yes">3.19</voltage>
+        <voltage id="12V" good="yes">12.00</voltage>
+        <temperature_deg_c id="Expander A" good="yes">60</temperature_deg_c>
+        <temperature_deg_c id="Expander B" good="yes">60</temperature_deg_c>
+        <front_panel>
+          <blower_rpm id="0" good="yes">4054</blower_rpm>
+        </front_panel>
+        <fan_tray>
+          <blower_rpm id="0" good="yes">8346</blower_rpm>
+          <blower_rpm id="1" good="yes">12826</blower_rpm>
+          <blower_rpm id="2" good="yes">8359</blower_rpm>
+          <blower_rpm id="3" good="yes">12558</blower_rpm>
+        </fan_tray>
+      </pod>
+      <pod id="2">
+        <voltage id="Exp A 1V2" good="yes">1.20</voltage>
+        <voltage id="Exp B 1V2" good="yes">1.20</voltage>
+        <voltage id="Exp A 3V3" good="yes">3.25</voltage>
+        <voltage id="Exp B 3V3" good="yes">3.28</voltage>
+        <voltage id="Stdby A 3V3" good="yes">3.17</voltage>
+        <voltage id="Stdby B 3V3" good="yes">3.17</voltage>
+        <voltage id="Shared 3V3" good="yes">3.19</voltage>
+        <voltage id="12V" good="yes">12.06</voltage>
+        <temperature_deg_c id="Expander A" good="yes">62</temperature_deg_c>
+        <temperature_deg_c id="Expander B" good="yes">62</temperature_deg_c>
+        <front_panel>
+          <blower_rpm id="0" good="yes">4122</blower_rpm>
+        </front_panel>
+        <fan_tray>
+          <blower_rpm id="0" good="yes">8346</blower_rpm>
+          <blower_rpm id="1" good="yes">12735</blower_rpm>
+          <blower_rpm id="2" good="yes">8398</blower_rpm>
+          <blower_rpm id="3" good="yes">12413</blower_rpm>
+        </fan_tray>
+      </pod>
+    </enclosure>
+    <enclosure id="1">
+      <psu id="0">
+        <state good="yes" power_watt="469">OK</state>
+        <temperature_deg_c good="yes">39</temperature_deg_c>
+        <blower_rpm id="0" good="yes">12765</blower_rpm>
+        <blower_rpm id="1" good="yes">12558</blower_rpm>
+        <blower_rpm id="2" good="yes">12676</blower_rpm>
+        <blower_rpm id="3" good="yes">12676</blower_rpm>
+      </psu>
+      <psu id="1">
+        <state good="yes" power_watt="469">OK</state>
+        <temperature_deg_c good="yes">41</temperature_deg_c>
+        <blower_rpm id="0" good="yes">14025</blower_rpm>
+        <blower_rpm id="1" good="yes">13775</blower_rpm>
+        <blower_rpm id="2" good="yes">14062</blower_rpm>
+        <blower_rpm id="3" good="yes">14062</blower_rpm>
+      </psu>
+      <controller id="0">
+        <voltage id="CPU" good="yes">1.20</voltage>
+        <voltage id="1V2" good="yes">1.21</voltage>
+        <voltage id="1V5" good="yes">1.49</voltage>
+        <voltage id="3V3" good="yes">3.31</voltage>
+        <voltage id="12V" good="yes">12.06</voltage>
+        <temperature_deg_c id="PCB" good="yes">35</temperature_deg_c>
+      </controller>
+      <controller id="1">
+        <voltage id="CPU" good="yes">1.20</voltage>
+        <voltage id="1V2" good="yes">1.21</voltage>
+        <voltage id="1V5" good="yes">1.49</voltage>
+        <voltage id="3V3" good="yes">3.31</voltage>
+        <voltage id="12V" good="yes">12.06</voltage>
+        <temperature_deg_c id="PCB" good="yes">35</temperature_deg_c>
+      </controller>
+      <pod id="0">
+        <voltage id="Exp A 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp B 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp A 3V3" good="yes">3.25</voltage>
+        <voltage id="Exp B 3V3" good="yes">3.25</voltage>
+        <voltage id="Stdby A 3V3" good="yes">3.14</voltage>
+        <voltage id="Stdby B 3V3" good="yes">3.13</voltage>
+        <voltage id="Shared 3V3" good="yes">3.30</voltage>
+        <voltage id="12V" good="yes">12.06</voltage>
+        <temperature_deg_c id="Expander A" good="yes">59</temperature_deg_c>
+        <temperature_deg_c id="Expander B" good="yes">60</temperature_deg_c>
+        <front_panel>
+          <blower_rpm id="0" good="yes">4017</blower_rpm>
+        </front_panel>
+        <fan_tray>
+          <blower_rpm id="0" good="yes">7448</blower_rpm>
+          <blower_rpm id="1" good="yes">12796</blower_rpm>
+          <blower_rpm id="2" good="yes">7541</blower_rpm>
+          <blower_rpm id="3" good="yes">12616</blower_rpm>
+        </fan_tray>
+      </pod>
+      <pod id="1">
+        <voltage id="Exp A 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp B 1V2" good="yes">1.24</voltage>
+        <voltage id="Exp A 3V3" good="yes">3.28</voltage>
+        <voltage id="Exp B 3V3" good="yes">3.25</voltage>
+        <voltage id="Stdby A 3V3" good="yes">3.16</voltage>
+        <voltage id="Stdby B 3V3" good="yes">3.16</voltage>
+        <voltage id="Shared 3V3" good="yes">3.30</voltage>
+        <voltage id="12V" good="yes">12.06</voltage>
+        <temperature_deg_c id="Expander A" good="yes">64</temperature_deg_c>
+        <temperature_deg_c id="Expander B" good="yes">59</temperature_deg_c>
+        <front_panel>
+          <blower_rpm id="0" good="yes">3218</blower_rpm>
+        </front_panel>
+        <fan_tray>
+          <blower_rpm id="0" good="yes">7095</blower_rpm>
+          <blower_rpm id="1" good="yes">12217</blower_rpm>
+          <blower_rpm id="2" good="yes">7068</blower_rpm>
+          <blower_rpm id="3" good="yes">12356</blower_rpm>
+        </fan_tray>
+      </pod>
+      <pod id="2">
+        <voltage id="Exp A 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp B 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp A 3V3" good="yes">3.25</voltage>
+        <voltage id="Exp B 3V3" good="yes">3.25</voltage>
+        <voltage id="Stdby A 3V3" good="yes">3.14</voltage>
+        <voltage id="Stdby B 3V3" good="yes">3.16</voltage>
+        <voltage id="Shared 3V3" good="yes">3.30</voltage>
+        <voltage id="12V" good="yes">12.12</voltage>
+        <temperature_deg_c id="Expander A" good="yes">61</temperature_deg_c>
+        <temperature_deg_c id="Expander B" good="yes">58</temperature_deg_c>
+        <front_panel>
+          <blower_rpm id="0" good="yes">2695</blower_rpm>
+        </front_panel>
+        <fan_tray>
+          <blower_rpm id="0" good="yes">10909</blower_rpm>
+          <blower_rpm id="1" good="yes">6020</blower_rpm>
+          <blower_rpm id="2" good="yes">10567</blower_rpm>
+          <blower_rpm id="3" good="yes">6040</blower_rpm>
+        </fan_tray>
+      </pod>
+    </enclosure>
+    <enclosure id="2">
+      <psu id="0">
+        <state good="yes" power_watt="332">OK</state>
+        <temperature_deg_c good="yes">39</temperature_deg_c>
+        <blower_rpm id="0" good="yes">12217</blower_rpm>
+        <blower_rpm id="1" good="yes">11920</blower_rpm>
+        <blower_rpm id="2" good="yes">11688</blower_rpm>
+        <blower_rpm id="3" good="yes">11688</blower_rpm>
+      </psu>
+      <psu id="1">
+        <state good="yes" power_watt="345">OK</state>
+        <temperature_deg_c good="yes">39</temperature_deg_c>
+        <blower_rpm id="0" good="yes">11946</blower_rpm>
+        <blower_rpm id="1" good="yes">11790</blower_rpm>
+        <blower_rpm id="2" good="yes">11440</blower_rpm>
+        <blower_rpm id="3" good="yes">11440</blower_rpm>
+      </psu>
+      <controller id="0">
+        <voltage id="CPU" good="yes">1.20</voltage>
+        <voltage id="1V2" good="yes">1.21</voltage>
+        <voltage id="1V5" good="yes">1.49</voltage>
+        <voltage id="3V3" good="yes">3.31</voltage>
+        <voltage id="12V" good="yes">12.12</voltage>
+        <temperature_deg_c id="PCB" good="yes">35</temperature_deg_c>
+      </controller>
+      <controller id="1">
+        <voltage id="CPU" good="yes">1.20</voltage>
+        <voltage id="1V2" good="yes">1.21</voltage>
+        <voltage id="1V5" good="yes">1.49</voltage>
+        <voltage id="3V3" good="yes">3.31</voltage>
+        <voltage id="12V" good="yes">12.12</voltage>
+        <temperature_deg_c id="PCB" good="yes">35</temperature_deg_c>
+      </controller>
+      <pod id="0">
+        <voltage id="Exp A 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp B 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp A 3V3" good="yes">3.28</voltage>
+        <voltage id="Exp B 3V3" good="yes">3.28</voltage>
+        <voltage id="Stdby A 3V3" good="yes">3.20</voltage>
+        <voltage id="Stdby B 3V3" good="yes">3.18</voltage>
+        <voltage id="Shared 3V3" good="yes">3.32</voltage>
+        <voltage id="12V" good="yes">12.12</voltage>
+        <temperature_deg_c id="Expander A" good="yes">58</temperature_deg_c>
+        <temperature_deg_c id="Expander B" good="yes">61</temperature_deg_c>
+        <front_panel>
+          <blower_rpm id="0" good="yes">2980</blower_rpm>
+        </front_panel>
+        <fan_tray>
+          <blower_rpm id="0" good="yes">11157</blower_rpm>
+          <blower_rpm id="1" good="yes">7040</blower_rpm>
+          <blower_rpm id="2" good="yes">11042</blower_rpm>
+          <blower_rpm id="3" good="yes">7058</blower_rpm>
+        </fan_tray>
+      </pod>
+      <pod id="1">
+        <voltage id="Exp A 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp B 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp A 3V3" good="yes">3.28</voltage>
+        <voltage id="Exp B 3V3" good="yes">3.28</voltage>
+        <voltage id="Stdby A 3V3" good="yes">3.21</voltage>
+        <voltage id="Stdby B 3V3" good="yes">3.21</voltage>
+        <voltage id="Shared 3V3" good="yes">3.32</voltage>
+        <voltage id="12V" good="yes">12.06</voltage>
+        <temperature_deg_c id="Expander A" good="yes">60</temperature_deg_c>
+        <temperature_deg_c id="Expander B" good="yes">59</temperature_deg_c>
+        <front_panel>
+          <blower_rpm id="0" good="yes">3163</blower_rpm>
+        </front_panel>
+        <fan_tray>
+          <blower_rpm id="0" good="yes">11489</blower_rpm>
+          <blower_rpm id="1" good="yes">7031</blower_rpm>
+          <blower_rpm id="2" good="yes">11368</blower_rpm>
+          <blower_rpm id="3" good="yes">7124</blower_rpm>
+        </fan_tray>
+      </pod>
+      <pod id="2">
+        <voltage id="Exp A 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp B 1V2" good="yes">1.23</voltage>
+        <voltage id="Exp A 3V3" good="yes">3.28</voltage>
+        <voltage id="Exp B 3V3" good="yes">3.28</voltage>
+        <voltage id="Stdby A 3V3" good="yes">3.23</voltage>
+        <voltage id="Stdby B 3V3" good="yes">3.21</voltage>
+        <voltage id="Shared 3V3" good="yes">3.34</voltage>
+        <voltage id="12V" good="yes">12.06</voltage>
+        <temperature_deg_c id="Expander A" good="yes">62</temperature_deg_c>
+        <temperature_deg_c id="Expander B" good="yes">58</temperature_deg_c>
+        <front_panel>
+          <blower_rpm id="0" good="yes">3135</blower_rpm>
+        </front_panel>
+        <fan_tray>
+          <blower_rpm id="0" good="yes">11464</blower_rpm>
+          <blower_rpm id="1" good="yes">7366</blower_rpm>
+          <blower_rpm id="2" good="yes">11587</blower_rpm>
+          <blower_rpm id="3" good="yes">7458</blower_rpm>
+        </fan_tray>
+      </pod>
+    </enclosure>
+  </nexsan_env_status>
+  <nexsan_volume_stats version="1" status="experimental">
+    <volume id="1" name="E60ABC01_SAS_R5_L1" array="1" serial_number="0x70C13258">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="1">
+        <total_ios>42</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>20</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>160</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="1">
+        <total_ios>9445479</total_ios>
+        <read_ios>4327880</read_ios>
+        <write_ios>5117461</write_ios>
+        <read_blocks>2782976761</read_blocks>
+        <write_blocks>502621356</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="1">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="1">
+        <total_ios>271553326</total_ios>
+        <read_ios>172960149</read_ios>
+        <write_ios>98589381</write_ios>
+        <read_blocks>103376604009</read_blocks>
+        <write_blocks>9648089772</write_blocks>
+      </path>
+    </volume>
+    <volume id="2" name="E60ABC01_SAS_R5_L2" array="2" serial_number="0x70C1327F">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="2">
+        <total_ios>271860997</total_ios>
+        <read_ios>1798</read_ios>
+        <write_ios>271857933</write_ios>
+        <read_blocks>1928</read_blocks>
+        <write_blocks>34797781261</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="2">
+        <total_ios>79</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="2">
+        <total_ios>80</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="2">
+        <total_ios>972288056</total_ios>
+        <read_ios>504250889</read_ios>
+        <write_ios>468029215</write_ios>
+        <read_blocks>305257346730</read_blocks>
+        <write_blocks>57134181531</write_blocks>
+      </path>
+    </volume>
+    <volume id="3" name="E60ABC01_SAS_R5_L3" array="3" serial_number="0x70C13391">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="3">
+        <total_ios>42</total_ios>
+        <read_ios>20</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>10240</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="3">
+        <total_ios>5224</total_ios>
+        <read_ios>2977</read_ios>
+        <write_ios>2225</write_ios>
+        <read_blocks>1562192</read_blocks>
+        <write_blocks>223181</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="3">
+        <total_ios>25</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="3">
+        <total_ios>284012204</total_ios>
+        <read_ios>184754834</read_ios>
+        <write_ios>99253458</write_ios>
+        <read_blocks>120812721551</read_blocks>
+        <write_blocks>9928351802</write_blocks>
+      </path>
+    </volume>
+    <volume id="4" name="E60ABC01_SAS_R5_L4" array="4" serial_number="0x70C1308A">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="4">
+        <total_ios>728</total_ios>
+        <read_ios>33</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>49</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="4">
+        <total_ios>1162893407</total_ios>
+        <read_ios>658676090</read_ios>
+        <write_ios>504209242</write_ios>
+        <read_blocks>413637979973</read_blocks>
+        <write_blocks>58278969403</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="4">
+        <total_ios>271860163</total_ios>
+        <read_ios>1567</read_ios>
+        <write_ios>271857966</write_ios>
+        <read_blocks>1681</read_blocks>
+        <write_blocks>34797793762</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="4">
+        <total_ios>76</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="5" name="E60ABC01_SAS_R5_L5" array="5" serial_number="0x70C130F2">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="5">
+        <total_ios>61</total_ios>
+        <read_ios>19</read_ios>
+        <write_ios>20</write_ios>
+        <read_blocks>38912</read_blocks>
+        <write_blocks>206</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="5">
+        <total_ios>667</total_ios>
+        <read_ios>218</read_ios>
+        <write_ios>427</write_ios>
+        <read_blocks>67608</read_blocks>
+        <write_blocks>42283</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="5">
+        <total_ios>292379880</total_ios>
+        <read_ios>188504520</read_ios>
+        <write_ios>103871449</write_ios>
+        <read_blocks>108828180310</read_blocks>
+        <write_blocks>10350859258</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="5">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="6" name="E60ABC01_SAS_R5_L6" array="6" serial_number="0x70C1300E">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="6">
+        <total_ios>271860353</total_ios>
+        <read_ios>1466</read_ios>
+        <write_ios>271857952</write_ios>
+        <read_blocks>1606</read_blocks>
+        <write_blocks>34797789588</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="6">
+        <total_ios>78</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="6">
+        <total_ios>277</total_ios>
+        <read_ios>3</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>3</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="6">
+        <total_ios>1050102900</total_ios>
+        <read_ios>542815675</read_ios>
+        <write_ios>507279274</write_ios>
+        <read_blocks>313696492449</read_blocks>
+        <write_blocks>58033106384</write_blocks>
+      </path>
+    </volume>
+    <volume id="7" name="E60ABC01_SAS_R5_L7" array="7" serial_number="0x70C13025">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="7">
+        <total_ios>6554</total_ios>
+        <read_ios>3594</read_ios>
+        <write_ios>2938</write_ios>
+        <read_blocks>1172436</read_blocks>
+        <write_blocks>326882</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="7">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="7">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="7">
+        <total_ios>299004026</total_ios>
+        <read_ios>186557442</read_ios>
+        <write_ios>112442670</write_ios>
+        <read_blocks>121283926847</read_blocks>
+        <write_blocks>10630861430</write_blocks>
+      </path>
+    </volume>
+    <volume id="8" name="E60ABC01_SATA_R5_L11" array="8" serial_number="0x70C131D5">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="11">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="11">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="11">
+        <total_ios>3994</total_ios>
+        <read_ios>54</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>70</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="11">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="9" name="E60ABC01_SATA_R5_L12" array="9" serial_number="0x70C131F0">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="12">
+        <total_ios>368</total_ios>
+        <read_ios>15</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>23</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="12">
+        <total_ios>69</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="12">
+        <total_ios>193</total_ios>
+        <read_ios>3</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>3</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="12">
+        <total_ios>8181</total_ios>
+        <read_ios>150</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>206</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="10" name="E60ABC01_SATA_R5_L13" array="10" serial_number="0x70C1310F">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="13">
+        <total_ios>3994</total_ios>
+        <read_ios>54</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>70</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="13">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="13">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="13">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="11" name="E60ABC01_SATA_R5_L14" array="11" serial_number="0x70C13125">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="14">
+        <total_ios>70</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="14">
+        <total_ios>8181</total_ios>
+        <read_ios>150</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>206</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="14">
+        <total_ios>289</total_ios>
+        <read_ios>15</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>23</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="14">
+        <total_ios>67</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="12" name="E60ABC01_SATA_R5_L15" array="12" serial_number="0x70C1315A">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="15">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="15">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="15">
+        <total_ios>3994</total_ios>
+        <read_ios>54</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>70</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="15">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="13" name="E60ABC01_SATA_R5_L16" array="13" serial_number="0x70C13170">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="16">
+        <total_ios>68</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="16">
+        <total_ios>289</total_ios>
+        <read_ios>15</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>23</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="16">
+        <total_ios>70</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="16">
+        <total_ios>8180</total_ios>
+        <read_ios>150</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>206</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="14" name="E60ABC01_SATA_R5_L17" array="14" serial_number="0x70C10F8E">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="17">
+        <total_ios>3899</total_ios>
+        <read_ios>2076</read_ios>
+        <write_ios>1801</write_ios>
+        <read_blocks>1030556</read_blocks>
+        <write_blocks>168569</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="17">
+        <total_ios>350254421</total_ios>
+        <read_ios>260024282</read_ios>
+        <write_ios>90226228</write_ios>
+        <read_blocks>161556334967</read_blocks>
+        <write_blocks>8068194728</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="17">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="17">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="15" name="E60ABC01_SATA_R5_L18" array="15" serial_number="0x70C10FA4">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="18">
+        <total_ios>163</total_ios>
+        <read_ios>12</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>20</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="18">
+        <total_ios>66</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="18">
+        <total_ios>70</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="18">
+        <total_ios>1290086512</total_ios>
+        <read_ios>748179560</read_ios>
+        <write_ios>541899007</write_ios>
+        <read_blocks>458301223619</read_blocks>
+        <write_blocks>71017458882</write_blocks>
+      </path>
+    </volume>
+    <volume id="16" name="E60ABC01_SATA_R5_L19" array="16" serial_number="0x70C10FC4">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="19">
+        <total_ios>42</total_ios>
+        <read_ios>20</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>1728</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="19">
+        <total_ios>5806</total_ios>
+        <read_ios>3495</read_ios>
+        <write_ios>2289</write_ios>
+        <read_blocks>1761227</read_blocks>
+        <write_blocks>170893</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="19">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="19">
+        <total_ios>301079061</total_ios>
+        <read_ios>218989709</read_ios>
+        <write_ios>82085442</write_ios>
+        <read_blocks>142430552698</read_blocks>
+        <write_blocks>7711769307</write_blocks>
+      </path>
+    </volume>
+    <volume id="17" name="E60ABC01_SATA_R5_L20" array="17" serial_number="0x70C10FD6">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="20">
+        <total_ios>162</total_ios>
+        <read_ios>12</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>20</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="20">
+        <total_ios>1306148664</total_ios>
+        <read_ios>791193955</read_ios>
+        <write_ios>514946647</write_ios>
+        <read_blocks>480075973276</read_blocks>
+        <write_blocks>67540975728</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="20">
+        <total_ios>70</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="20">
+        <total_ios>67</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="18" name="E60ABC01_SATA_R5_L21" array="18" serial_number="0x70C10F00">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="21">
+        <total_ios>2895</total_ios>
+        <read_ios>1220</read_ios>
+        <write_ios>1653</write_ios>
+        <read_blocks>708392</read_blocks>
+        <write_blocks>120229</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="21">
+        <total_ios>312411600</total_ios>
+        <read_ios>234235513</read_ios>
+        <write_ios>78172175</write_ios>
+        <read_blocks>150944907683</read_blocks>
+        <write_blocks>8747360164</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="21">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="21">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="19" name="E60ABC01_SATA_R5_L22" array="19" serial_number="0x70C10F17">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="22">
+        <total_ios>162</total_ios>
+        <read_ios>12</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>20</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="22">
+        <total_ios>66</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="22">
+        <total_ios>70</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="22">
+        <total_ios>1208670383</total_ios>
+        <read_ios>684211132</read_ios>
+        <write_ios>524451310</write_ios>
+        <read_blocks>431659959261</read_blocks>
+        <write_blocks>69701751313</write_blocks>
+      </path>
+    </volume>
+    <volume id="20" name="E60ABC01_SATA_R5_L23" array="20" serial_number="0x70C10F25">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="23">
+        <total_ios>4682</total_ios>
+        <read_ios>2296</read_ios>
+        <write_ios>2364</write_ios>
+        <read_blocks>864456</read_blocks>
+        <write_blocks>257044</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="23">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="23">
+        <total_ios>3615</total_ios>
+        <read_ios>1621</read_ios>
+        <write_ios>1972</write_ios>
+        <read_blocks>559168</read_blocks>
+        <write_blocks>226745</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="23">
+        <total_ios>286017654</total_ios>
+        <read_ios>216922345</read_ios>
+        <write_ios>69091396</write_ios>
+        <read_blocks>138362108845</read_blocks>
+        <write_blocks>7859257185</write_blocks>
+      </path>
+    </volume>
+    <volume id="21" name="E60ABC01_SATA_R5_L24" array="21" serial_number="0x70C10F39">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="24">
+        <total_ios>162</total_ios>
+        <read_ios>12</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>20</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="24">
+        <total_ios>1172281814</total_ios>
+        <read_ios>628551864</read_ios>
+        <write_ios>543721884</write_ios>
+        <read_blocks>390078714513</read_blocks>
+        <write_blocks>67173243568</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="24">
+        <total_ios>70</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="24">
+        <total_ios>67</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="22" name="E60ABC01_SAS_R5_L8" array="22" serial_number="0x70C09DC3">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="8">
+        <total_ios>1040570318</total_ios>
+        <read_ios>547096075</read_ios>
+        <write_ios>493468561</write_ios>
+        <read_blocks>342727660925</read_blocks>
+        <write_blocks>58744413481</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="8">
+        <total_ios>21641566</total_ios>
+        <read_ios>11982040</read_ios>
+        <write_ios>9657304</write_ios>
+        <read_blocks>7230750555</read_blocks>
+        <write_blocks>907178001</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="8">
+        <total_ios>69</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="8">
+        <total_ios>66</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="23" name="E60ABC01_SAS_R10_L9" array="23" serial_number="0x70C09AFA">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="9">
+        <total_ios>26</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="9">
+        <total_ios>22</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="9">
+        <total_ios>1919</total_ios>
+        <read_ios>45</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>61</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="9">
+        <total_ios>2098</total_ios>
+        <read_ios>9</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>9</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="24" name="E60ABC01_SAS_R10_L10" array="24" serial_number="0x70C09A23">
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="13" lun="10">
+        <total_ios>5904</total_ios>
+        <read_ios>147</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>211</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-BD-E0" target_id="1" lun="10">
+        <total_ios>2241</total_ios>
+        <read_ios>9</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>9</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="12" lun="10">
+        <total_ios>69</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+      <path init_ident="WWPN: 20-00-A1-B2-C3-1E-C1-B0" target_id="0" lun="10">
+        <total_ios>66</total_ios>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+      </path>
+    </volume>
+    <volume id="209" name="###SNAPDATA###" array="24" serial_number="0x70C09A20">
+</volume>
+    <volume id="210" name="###METADATA###" array="24" serial_number="0x70C09A1F">
+</volume>
+    <volume id="211" name="###SNAPDATA###" array="23" serial_number="0x70C09AF4">
+</volume>
+    <volume id="212" name="###METADATA###" array="23" serial_number="0x70C09AF3">
+</volume>
+    <volume id="213" name="###SNAPDATA###" array="22" serial_number="0x70C09DBE">
+</volume>
+    <volume id="214" name="###METADATA###" array="22" serial_number="0x70C09DBD">
+</volume>
+    <volume id="215" name="###SNAPDATA###" array="21" serial_number="0x70C10F3B">
+</volume>
+    <volume id="216" name="###METADATA###" array="21" serial_number="0x70C10F3A">
+</volume>
+    <volume id="217" name="###SNAPDATA###" array="20" serial_number="0x70C10F28">
+</volume>
+    <volume id="218" name="###METADATA###" array="20" serial_number="0x70C10F27">
+</volume>
+    <volume id="219" name="###SNAPDATA###" array="19" serial_number="0x70C10F12">
+</volume>
+    <volume id="220" name="###METADATA###" array="19" serial_number="0x70C10F11">
+</volume>
+    <volume id="221" name="###SNAPDATA###" array="18" serial_number="0x70C10F03">
+</volume>
+    <volume id="222" name="###METADATA###" array="18" serial_number="0x70C10F02">
+</volume>
+    <volume id="223" name="###SNAPDATA###" array="17" serial_number="0x70C10FD1">
+</volume>
+    <volume id="224" name="###METADATA###" array="17" serial_number="0x70C10FD0">
+</volume>
+    <volume id="225" name="###SNAPDATA###" array="16" serial_number="0x70C10FC3">
+</volume>
+    <volume id="226" name="###METADATA###" array="16" serial_number="0x70C10FC2">
+</volume>
+    <volume id="227" name="###SNAPDATA###" array="15" serial_number="0x70C10FA2">
+</volume>
+    <volume id="228" name="###METADATA###" array="15" serial_number="0x70C10FA1">
+</volume>
+    <volume id="229" name="###SNAPDATA###" array="14" serial_number="0x70C10F8C">
+</volume>
+    <volume id="230" name="###METADATA###" array="14" serial_number="0x70C10F8B">
+</volume>
+    <volume id="231" name="###SNAPDATA###" array="13" serial_number="0x70C1316E">
+</volume>
+    <volume id="232" name="###METADATA###" array="13" serial_number="0x70C1316D">
+</volume>
+    <volume id="233" name="###SNAPDATA###" array="12" serial_number="0x70C13158">
+</volume>
+    <volume id="234" name="###METADATA###" array="12" serial_number="0x70C13157">
+</volume>
+    <volume id="235" name="###SNAPDATA###" array="11" serial_number="0x70C13128">
+</volume>
+    <volume id="236" name="###METADATA###" array="11" serial_number="0x70C13127">
+</volume>
+    <volume id="237" name="###SNAPDATA###" array="10" serial_number="0x70C1310C">
+</volume>
+    <volume id="238" name="###METADATA###" array="10" serial_number="0x70C1310B">
+</volume>
+    <volume id="239" name="###SNAPDATA###" array="9" serial_number="0x70C131F3">
+</volume>
+    <volume id="240" name="###METADATA###" array="9" serial_number="0x70C131F2">
+</volume>
+    <volume id="241" name="###SNAPDATA###" array="8" serial_number="0x70C131D7">
+</volume>
+    <volume id="242" name="###METADATA###" array="8" serial_number="0x70C131D6">
+</volume>
+    <volume id="243" name="###SNAPDATA###" array="7" serial_number="0x70C13028">
+</volume>
+    <volume id="244" name="###METADATA###" array="7" serial_number="0x70C13027">
+</volume>
+    <volume id="245" name="###SNAPDATA###" array="6" serial_number="0x70C1300C">
+</volume>
+    <volume id="246" name="###METADATA###" array="6" serial_number="0x70C1300B">
+</volume>
+    <volume id="247" name="###SNAPDATA###" array="5" serial_number="0x70C130ED">
+</volume>
+    <volume id="248" name="###METADATA###" array="5" serial_number="0x70C130EC">
+</volume>
+    <volume id="249" name="###SNAPDATA###" array="4" serial_number="0x70C13085">
+</volume>
+    <volume id="250" name="###METADATA###" array="4" serial_number="0x70C13084">
+</volume>
+    <volume id="251" name="###SNAPDATA###" array="3" serial_number="0x70C13393">
+</volume>
+    <volume id="252" name="###METADATA###" array="3" serial_number="0x70C13392">
+</volume>
+    <volume id="253" name="###SNAPDATA###" array="2" serial_number="0x70C1327C">
+</volume>
+    <volume id="254" name="###METADATA###" array="2" serial_number="0x70C1327B">
+</volume>
+    <volume id="255" name="###SNAPDATA###" array="1" serial_number="0x70C13257">
+</volume>
+    <volume id="256" name="###METADATA###" array="1" serial_number="0x70C13256">
+</volume>
+  </nexsan_volume_stats>
+  <nexsan_perf_status version="2" status="experimental">
+    <controller id="0">
+      <cpu_percent>16</cpu_percent>
+      <memory_percent>38</memory_percent>
+      <port name="Fibre - Host0">
+        <read_mbytes_per_sec>76</read_mbytes_per_sec>
+        <write_mbytes_per_sec>10</write_mbytes_per_sec>
+        <read_ios>2483933528</read_ios>
+        <write_ios>2118181371</write_ios>
+        <read_blocks>1511750808555</read_blocks>
+        <write_blocks>265523917855</write_blocks>
+        <port_resets>2</port_resets>
+        <lun_resets>0</lun_resets>
+        <!-- t 2 -->
+        <link_errors>
+          <link_error id="0" error_name="link_failure" count="9"/>
+          <link_error id="1" error_name="loss_of_sync" count="0"/>
+          <link_error id="2" error_name="loss_of_signal" count="0"/>
+          <link_error id="3" error_name="primitive_seq_errs" count="0"/>
+          <link_error id="4" error_name="invalid_tx_words" count="383"/>
+          <link_error id="5" error_name="invalid_tx_crcs" count="0"/>
+          <link_error id="6" error_name="discarded_frames" count="0"/>
+          <link_error id="7" error_name="fw_dropped_frames" count="0"/>
+        </link_errors>
+      </port>
+      <port name="Fibre - Host1">
+        <read_mbytes_per_sec>77</read_mbytes_per_sec>
+        <write_mbytes_per_sec>12</write_mbytes_per_sec>
+        <read_ios>2090888411</read_ios>
+        <write_ios>1644606275</write_ios>
+        <read_blocks>1291215959784</read_blocks>
+        <write_blocks>203110373427</write_blocks>
+        <port_resets>2</port_resets>
+        <lun_resets>0</lun_resets>
+        <!-- t 2 -->
+        <link_errors>
+          <link_error id="0" error_name="link_failure" count="4"/>
+          <link_error id="1" error_name="loss_of_sync" count="0"/>
+          <link_error id="2" error_name="loss_of_signal" count="0"/>
+          <link_error id="3" error_name="primitive_seq_errs" count="0"/>
+          <link_error id="4" error_name="invalid_tx_words" count="0"/>
+          <link_error id="5" error_name="invalid_tx_crcs" count="0"/>
+          <link_error id="6" error_name="discarded_frames" count="0"/>
+          <link_error id="7" error_name="fw_dropped_frames" count="0"/>
+        </link_errors>
+      </port>
+      <port name="1Ge-iSCSI - Net0">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+        <!-- t 3 -->
+        <link_errors>
+          <link_error id="0" error_name="tx_collisions" count="0"/>
+          <link_error id="1" error_name="tx_carrier_errors" count="0"/>
+          <link_error id="2" error_name="tx_fifo_errors" count="0"/>
+          <link_error id="3" error_name="tx_window_errors" count="0"/>
+          <link_error id="4" error_name="tx_other_errors" count="0"/>
+          <link_error id="5" error_name="rx_length_errors" count="0"/>
+          <link_error id="6" error_name="rx_over_errors" count="0"/>
+          <link_error id="7" error_name="rx_fifo_errors" count="0"/>
+          <link_error id="8" error_name="rx_crc_errors" count="0"/>
+          <link_error id="9" error_name="rx_frame_errors" count="0"/>
+          <link_error id="10" error_name="rx_other_errors" count="0"/>
+        </link_errors>
+      </port>
+      <port name="1Ge-iSCSI - Net1">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+        <!-- t 3 -->
+        <link_errors>
+          <link_error id="0" error_name="tx_collisions" count="0"/>
+          <link_error id="1" error_name="tx_carrier_errors" count="0"/>
+          <link_error id="2" error_name="tx_fifo_errors" count="0"/>
+          <link_error id="3" error_name="tx_window_errors" count="0"/>
+          <link_error id="4" error_name="tx_other_errors" count="0"/>
+          <link_error id="5" error_name="rx_length_errors" count="0"/>
+          <link_error id="6" error_name="rx_over_errors" count="0"/>
+          <link_error id="7" error_name="rx_fifo_errors" count="0"/>
+          <link_error id="8" error_name="rx_crc_errors" count="0"/>
+          <link_error id="9" error_name="rx_frame_errors" count="0"/>
+          <link_error id="10" error_name="rx_other_errors" count="0"/>
+        </link_errors>
+      </port>
+    </controller>
+    <controller id="1">
+      <cpu_percent>16</cpu_percent>
+      <memory_percent>34</memory_percent>
+      <port name="Fibre - Host0">
+        <read_mbytes_per_sec>28</read_mbytes_per_sec>
+        <write_mbytes_per_sec>13</write_mbytes_per_sec>
+        <read_ios>855724523</read_ios>
+        <write_ios>370859233</write_ios>
+        <read_blocks>524706027935</read_blocks>
+        <write_blocks>36814503922</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+        <!-- t 2 -->
+        <link_errors>
+          <link_error id="0" error_name="link_failure" count="4"/>
+          <link_error id="1" error_name="loss_of_sync" count="0"/>
+          <link_error id="2" error_name="loss_of_signal" count="0"/>
+          <link_error id="3" error_name="primitive_seq_errs" count="0"/>
+          <link_error id="4" error_name="invalid_tx_words" count="575"/>
+          <link_error id="5" error_name="invalid_tx_crcs" count="0"/>
+          <link_error id="6" error_name="discarded_frames" count="0"/>
+          <link_error id="7" error_name="fw_dropped_frames" count="0"/>
+        </link_errors>
+      </port>
+      <port name="Fibre - Host1">
+        <read_mbytes_per_sec>101</read_mbytes_per_sec>
+        <write_mbytes_per_sec>12</write_mbytes_per_sec>
+        <read_ios>981670872</read_ios>
+        <write_ios>466732992</write_ios>
+        <read_blocks>636959811764</read_blocks>
+        <write_blocks>45785427197</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+        <!-- t 2 -->
+        <link_errors>
+          <link_error id="0" error_name="link_failure" count="4"/>
+          <link_error id="1" error_name="loss_of_sync" count="0"/>
+          <link_error id="2" error_name="loss_of_signal" count="0"/>
+          <link_error id="3" error_name="primitive_seq_errs" count="0"/>
+          <link_error id="4" error_name="invalid_tx_words" count="1635"/>
+          <link_error id="5" error_name="invalid_tx_crcs" count="0"/>
+          <link_error id="6" error_name="discarded_frames" count="0"/>
+          <link_error id="7" error_name="fw_dropped_frames" count="0"/>
+        </link_errors>
+      </port>
+      <port name="1Ge-iSCSI - Net0">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+        <!-- t 3 -->
+        <link_errors>
+          <link_error id="0" error_name="tx_collisions" count="0"/>
+          <link_error id="1" error_name="tx_carrier_errors" count="0"/>
+          <link_error id="2" error_name="tx_fifo_errors" count="0"/>
+          <link_error id="3" error_name="tx_window_errors" count="0"/>
+          <link_error id="4" error_name="tx_other_errors" count="0"/>
+          <link_error id="5" error_name="rx_length_errors" count="0"/>
+          <link_error id="6" error_name="rx_over_errors" count="0"/>
+          <link_error id="7" error_name="rx_fifo_errors" count="0"/>
+          <link_error id="8" error_name="rx_crc_errors" count="0"/>
+          <link_error id="9" error_name="rx_frame_errors" count="0"/>
+          <link_error id="10" error_name="rx_other_errors" count="0"/>
+        </link_errors>
+      </port>
+      <port name="1Ge-iSCSI - Net1">
+        <read_mbytes_per_sec>0</read_mbytes_per_sec>
+        <write_mbytes_per_sec>0</write_mbytes_per_sec>
+        <read_ios>0</read_ios>
+        <write_ios>0</write_ios>
+        <read_blocks>0</read_blocks>
+        <write_blocks>0</write_blocks>
+        <port_resets>0</port_resets>
+        <lun_resets>0</lun_resets>
+        <!-- t 3 -->
+        <link_errors>
+          <link_error id="0" error_name="tx_collisions" count="0"/>
+          <link_error id="1" error_name="tx_carrier_errors" count="0"/>
+          <link_error id="2" error_name="tx_fifo_errors" count="0"/>
+          <link_error id="3" error_name="tx_window_errors" count="0"/>
+          <link_error id="4" error_name="tx_other_errors" count="0"/>
+          <link_error id="5" error_name="rx_length_errors" count="0"/>
+          <link_error id="6" error_name="rx_over_errors" count="0"/>
+          <link_error id="7" error_name="rx_fifo_errors" count="0"/>
+          <link_error id="8" error_name="rx_crc_errors" count="0"/>
+          <link_error id="9" error_name="rx_frame_errors" count="0"/>
+          <link_error id="10" error_name="rx_other_errors" count="0"/>
+        </link_errors>
+      </port>
+    </controller>
+    <array name="E60ABC01_SAS_R5_L1">
+      <owner>1</owner>
+      <load_percent>18</load_percent>
+    </array>
+    <array name="E60ABC01_SAS_R5_L2">
+      <owner>0</owner>
+      <load_percent>16</load_percent>
+    </array>
+    <array name="E60ABC01_SAS_R5_L3">
+      <owner>1</owner>
+      <load_percent>16</load_percent>
+    </array>
+    <array name="E60ABC01_SAS_R5_L4">
+      <owner>0</owner>
+      <load_percent>19</load_percent>
+    </array>
+    <array name="E60ABC01_SAS_R5_L5">
+      <owner>1</owner>
+      <load_percent>10</load_percent>
+    </array>
+    <array name="E60ABC01_SAS_R5_L6">
+      <owner>0</owner>
+      <load_percent>15</load_percent>
+    </array>
+    <array name="E60ABC01_SAS_R5_L7">
+      <owner>1</owner>
+      <load_percent>14</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L11">
+      <owner>1</owner>
+      <load_percent>0</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L12">
+      <owner>0</owner>
+      <load_percent>1</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L13">
+      <owner>1</owner>
+      <load_percent>0</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L14">
+      <owner>0</owner>
+      <load_percent>0</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L15">
+      <owner>1</owner>
+      <load_percent>0</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L16">
+      <owner>0</owner>
+      <load_percent>0</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L17">
+      <owner>1</owner>
+      <load_percent>40</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L18">
+      <owner>0</owner>
+      <load_percent>40</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L19">
+      <owner>1</owner>
+      <load_percent>38</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L20">
+      <owner>0</owner>
+      <load_percent>36</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L21">
+      <owner>1</owner>
+      <load_percent>34</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L22">
+      <owner>0</owner>
+      <load_percent>39</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L23">
+      <owner>1</owner>
+      <load_percent>38</load_percent>
+    </array>
+    <array name="E60ABC01_SATA_R5_L24">
+      <owner>0</owner>
+      <load_percent>29</load_percent>
+    </array>
+    <array name="E60ABC01_SAS_R5_L8">
+      <owner>0</owner>
+      <load_percent>12</load_percent>
+    </array>
+    <array name="E60ABC01_SAS_R10_L9">
+      <owner>1</owner>
+      <load_percent>0</load_percent>
+    </array>
+    <array name="E60ABC01_SAS_R10_L10">
+      <owner>0</owner>
+      <load_percent>0</load_percent>
+    </array>
+  </nexsan_perf_status>
+  <nexsan_maid_stats version="2" status="experimental">
+    <maid_state>enabled</maid_state>
+    <maid_stats_status good="yes">Valid and available</maid_stats_status>
+    <maid_group name="E60ABC01_SAS_R5_L1">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SAS_R5_L2">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SAS_R5_L3">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SAS_R5_L4">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SAS_R5_L5">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SAS_R5_L6">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SAS_R5_L7">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L11">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L12">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L13">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L14">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L15">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L16">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L17">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L18">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L19">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L20">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L21">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L22">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L23">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SATA_R5_L24">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SAS_R5_L8">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SAS_R10_L9">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="E60ABC01_SAS_R10_L10">
+      <active_percent>100</active_percent>
+      <idle_percent>0</idle_percent>
+      <slow_percent>0</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>0</efficiency_percent>
+    </maid_group>
+    <maid_group name="UNUSED">
+      <active_percent>1</active_percent>
+      <idle_percent>42</idle_percent>
+      <slow_percent>57</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>27</efficiency_percent>
+    </maid_group>
+    <maid_group name="TOTAL">
+      <active_percent>93</active_percent>
+      <idle_percent>3</idle_percent>
+      <slow_percent>4</slow_percent>
+      <stopped_percent>0</stopped_percent>
+      <off_percent>0</off_percent>
+      <standby_percent>0</standby_percent>
+      <efficiency_percent>2</efficiency_percent>
+    </maid_group>
+    <reporting_period>
+      <start_date human="Monday 12-Mar-2018 12:27">1520857677</start_date>
+      <end_date human="Tuesday 17-Apr-2018 11:07">1523963221</end_date>
+    </reporting_period>
+  </nexsan_maid_stats>
+</nexsan_op_status>
