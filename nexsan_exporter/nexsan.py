@@ -52,6 +52,11 @@ class Collector:
         self.__nexsan_volume_blocks_write_total = CounterMetricFamily('nexsan_volume_blocks_write_total', '', labels=['volume', 'name', 'array', 'serial', 'ident', 'target', 'lun'])
         self.__nexsan_perf_cpu_usage_percent = GaugeMetricFamily('nexsan_perf_cpu_usage_percent', '', labels=['controller'])
         self.__nexsan_perf_memory_usage_percent = GaugeMetricFamily('nexsan_perf_memory_usage_percent', '', labels=['controller'])
+        for x in ['read_bytes_per_second', 'write_bytes_per_second', 'read_ios_total', 'write_ios_total', 'read_blocks_total', 'write_blocks_total', 'port_resets_total', 'lun_resets_total']:
+            c = CounterMetricFamily if x.endswith('_total') else GaugeMetricFamily
+            setattr(self, '_Collector__nexsan_perf_{}'.format(x), c('nexsan_perf_{}'.format(x), '', labels=['controller', 'port']))
+        self.__nexsan_perf_link_errors_total = CounterMetricFamily('nexsan_perf_link_errors_total', '', labels=['controller', 'port', 'name'])
+        self.__nexsan_perf_load_ratio = GaugeMetricFamily('nexsan_perf_load_ratio', '', labels=['array', 'owner'])
 
     def isgood(self, elem):
         if elem.attrib['good'] == 'yes':
@@ -151,3 +156,21 @@ class Collector:
 
             self.__nexsan_perf_cpu_usage_percent.add_metric(values, int(controller.findtext('./cpu_percent')))
             self.__nexsan_perf_memory_usage_percent.add_metric(values, int(controller.findtext('./memory_percent')))
+
+            for port in controller.iterfind('./port'):
+                port_values = values + [port.attrib['name']]
+
+                self.__nexsan_perf_read_bytes_per_second.add_metric(port_values, 1024 * 1024 * int(port.findtext('./read_mbytes_per_sec')))
+                self.__nexsan_perf_write_bytes_per_second.add_metric(port_values, 1024 * 1024 * int(port.findtext('./write_mbytes_per_sec')))
+                self.__nexsan_perf_read_ios_total.add_metric(port_values, int(port.findtext('./read_ios')))
+                self.__nexsan_perf_write_ios_total.add_metric(port_values, int(port.findtext('./write_ios')))
+                self.__nexsan_perf_read_blocks_total.add_metric(port_values, int(port.findtext('./read_blocks')))
+                self.__nexsan_perf_write_blocks_total.add_metric(port_values, int(port.findtext('./write_blocks')))
+                self.__nexsan_perf_port_resets_total.add_metric(port_values, int(port.findtext('./port_resets')))
+                self.__nexsan_perf_lun_resets_total.add_metric(port_values, int(port.findtext('./lun_resets')))
+
+                for le in port.iterfind('./link_errors/link_error'):
+                    self.__nexsan_perf_link_errors_total.add_metric(port_values + [le.attrib['error_name']], int(le.attrib['count']))
+
+        for array in perf.iterfind('./array'):
+            self.__nexsan_perf_load_ratio.add_metric([array.attrib['name'], array.findtext('./owner')], int(array.findtext('./load_percent'))/100)

@@ -520,17 +520,17 @@ def nexsan_perf(request):
               <read_blocks>1511750808555</read_blocks>
               <write_blocks>265523917855</write_blocks>
               <port_resets>2</port_resets>
-              <lun_resets>0</lun_resets>
+              <lun_resets>17</lun_resets>
               <!-- t 2 -->
               <link_errors>
-                <link_error id="0" error_name="link_failure" count="9"/>
-                <link_error id="1" error_name="loss_of_sync" count="0"/>
-                <link_error id="2" error_name="loss_of_signal" count="0"/>
-                <link_error id="3" error_name="primitive_seq_errs" count="0"/>
-                <link_error id="4" error_name="invalid_tx_words" count="383"/>
-                <link_error id="5" error_name="invalid_tx_crcs" count="0"/>
-                <link_error id="6" error_name="discarded_frames" count="0"/>
-                <link_error id="7" error_name="fw_dropped_frames" count="0"/>
+                <link_error id="0" error_name="link_failure" count="3"/>
+                <link_error id="1" error_name="loss_of_sync" count="4"/>
+                <link_error id="2" error_name="loss_of_signal" count="5"/>
+                <link_error id="3" error_name="primitive_seq_errs" count="6"/>
+                <link_error id="4" error_name="invalid_tx_words" count="7"/>
+                <link_error id="5" error_name="invalid_tx_crcs" count="8"/>
+                <link_error id="6" error_name="discarded_frames" count="9"/>
+                <link_error id="7" error_name="fw_dropped_frames" count="10"/>
               </link_errors>
             </port>
             <port name="Fibre - Host1">
@@ -540,26 +540,26 @@ def nexsan_perf(request):
               <write_ios>1644606275</write_ios>
               <read_blocks>1291215959784</read_blocks>
               <write_blocks>203110373427</write_blocks>
-              <port_resets>2</port_resets>
-              <lun_resets>0</lun_resets>
+              <port_resets>4</port_resets>
+              <lun_resets>3</lun_resets>
               <!-- t 2 -->
               <link_errors>
-                <link_error id="0" error_name="link_failure" count="4"/>
-                <link_error id="1" error_name="loss_of_sync" count="0"/>
-                <link_error id="2" error_name="loss_of_signal" count="0"/>
-                <link_error id="3" error_name="primitive_seq_errs" count="0"/>
-                <link_error id="4" error_name="invalid_tx_words" count="0"/>
-                <link_error id="5" error_name="invalid_tx_crcs" count="0"/>
-                <link_error id="6" error_name="discarded_frames" count="0"/>
-                <link_error id="7" error_name="fw_dropped_frames" count="0"/>
+                <link_error id="0" error_name="link_failure" count="10"/>
+                <link_error id="1" error_name="loss_of_sync" count="9"/>
+                <link_error id="2" error_name="loss_of_signal" count="8"/>
+                <link_error id="3" error_name="primitive_seq_errs" count="7"/>
+                <link_error id="4" error_name="invalid_tx_words" count="6"/>
+                <link_error id="5" error_name="invalid_tx_crcs" count="5"/>
+                <link_error id="6" error_name="discarded_frames" count="4"/>
+                <link_error id="7" error_name="fw_dropped_frames" count="3"/>
               </link_errors>
             </port>
           </controller>
-          <array name="E60TRF01_SAS_R5_L1">
+          <array name="array1">
             <owner>1</owner>
             <load_percent>18</load_percent>
           </array>
-          <array name="E60TRF01_SAS_R5_L2">
+          <array name="array2">
             <owner>0</owner>
             <load_percent>16</load_percent>
           </array>
@@ -575,10 +575,115 @@ def test_perf_cpu_usage_ratio(nexsan_perf):
         ('nexsan_perf_cpu_usage_percent', {'controller': '2'}, 16)
     ] == mf.samples
 
-def test_memory_usage_ratio(nexsan_perf):
+def test_perf_memory_usage_ratio(nexsan_perf):
     c = nexsan.Collector(nexsan_perf)
     mf = getmf(c.collect(), 'nexsan_perf_memory_usage_percent')
     assert 'gauge' == mf.type
     assert [
         ('nexsan_perf_memory_usage_percent', {'controller': '2'}, 38)
+    ] == mf.samples
+
+def test_perf_read_bytes_per_second(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_read_bytes_per_second')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_perf_read_bytes_per_second', {'controller': '2', 'port': 'Fibre - Host0'}, 76 * 1024 * 1024),
+        ('nexsan_perf_read_bytes_per_second', {'controller': '2', 'port': 'Fibre - Host1'}, 77 * 1024 * 1024),
+
+    ] == mf.samples
+
+def test_perf_write_bytes_per_second(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_write_bytes_per_second')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_perf_write_bytes_per_second', {'controller': '2', 'port': 'Fibre - Host0'}, 10 * 1024 * 1024),
+        ('nexsan_perf_write_bytes_per_second', {'controller': '2', 'port': 'Fibre - Host1'}, 12 * 1024 * 1024),
+    ] == mf.samples
+
+def test_perf_read_ios_total(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_read_ios_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_perf_read_ios_total', {'controller': '2', 'port': 'Fibre - Host0'}, 2483933528),
+        ('nexsan_perf_read_ios_total', {'controller': '2', 'port': 'Fibre - Host1'}, 2090888411),
+    ] == mf.samples
+
+def test_perf_write_ios_total(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_write_ios_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_perf_write_ios_total', {'controller': '2', 'port': 'Fibre - Host0'}, 2118181371),
+        ('nexsan_perf_write_ios_total', {'controller': '2', 'port': 'Fibre - Host1'}, 1644606275),
+    ] == mf.samples
+
+def test_perf_read_blocks_total(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_read_blocks_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_perf_read_blocks_total', {'controller': '2', 'port': 'Fibre - Host0'}, 1511750808555),
+        ('nexsan_perf_read_blocks_total', {'controller': '2', 'port': 'Fibre - Host1'}, 1291215959784),
+    ] == mf.samples
+
+def test_perf_write_blocks_total(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_write_blocks_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_perf_write_blocks_total', {'controller': '2', 'port': 'Fibre - Host0'}, 265523917855),
+        ('nexsan_perf_write_blocks_total', {'controller': '2', 'port': 'Fibre - Host1'}, 203110373427),
+    ] == mf.samples
+
+def test_perf_port_resets_total(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_port_resets_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_perf_port_resets_total', {'controller': '2', 'port': 'Fibre - Host0'}, 2),
+        ('nexsan_perf_port_resets_total', {'controller': '2', 'port': 'Fibre - Host1'}, 4),
+    ] == mf.samples
+
+def test_perf_lun_resets_total(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_lun_resets_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_perf_lun_resets_total', {'controller': '2', 'port': 'Fibre - Host0'}, 17),
+        ('nexsan_perf_lun_resets_total', {'controller': '2', 'port': 'Fibre - Host1'}, 3),
+    ] == mf.samples
+
+def test_perf_link_errors_total(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_link_errors_total')
+    assert 'counter' == mf.type
+    assert [
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host0', 'name': 'link_failure'}, 3),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host0', 'name': 'loss_of_sync'}, 4),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host0', 'name': 'loss_of_signal'}, 5),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host0', 'name': 'primitive_seq_errs'}, 6),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host0', 'name': 'invalid_tx_words'}, 7),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host0', 'name': 'invalid_tx_crcs'}, 8),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host0', 'name': 'discarded_frames'}, 9),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host0', 'name': 'fw_dropped_frames'}, 10),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host1', 'name': 'link_failure'}, 10),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host1', 'name': 'loss_of_sync'}, 9),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host1', 'name': 'loss_of_signal'}, 8),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host1', 'name': 'primitive_seq_errs'}, 7),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host1', 'name': 'invalid_tx_words'}, 6),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host1', 'name': 'invalid_tx_crcs'}, 5),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host1', 'name': 'discarded_frames'}, 4),
+        ('nexsan_perf_link_errors_total', {'controller': '2', 'port': 'Fibre - Host1', 'name': 'fw_dropped_frames'}, 3),
+    ] == mf.samples
+
+def test_perf_array_load_ratio(nexsan_perf):
+    c = nexsan.Collector(nexsan_perf)
+    mf = getmf(c.collect(), 'nexsan_perf_load_ratio')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_perf_load_ratio', {'array': 'array1', 'owner': '1'}, 0.18),
+        ('nexsan_perf_load_ratio', {'array': 'array2', 'owner': '0'}, 0.16),
     ] == mf.samples
