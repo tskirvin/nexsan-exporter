@@ -15,7 +15,7 @@ $ python3 -m pip install git+https://github.com/yrro/nexsan-exporter.git
 $ nexsan-exporter
 ```
 
-You can then visit <http://localhost:9333/probe?target=192.0.2.1&user=foo&pass=bar> to view
+You can then visit <http://localhost:9335/probe?target=192.0.2.1&user=foo&pass=bar> to view
 metrics for the target device; for instance:
 
 ```
@@ -60,7 +60,7 @@ scrape_configs:
     - source_labels: [__param_target]
       target_label: instance
     - target_label: __address__
-      replacement: exporter-host:9333
+      replacement: exporter-host:9335
 ```
 
 Exporter Configuration
