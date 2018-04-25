@@ -57,6 +57,9 @@ class Collector:
             setattr(self, '_Collector__nexsan_perf_{}'.format(x), c('nexsan_perf_{}'.format(x), '', labels=['controller', 'port']))
         self.__nexsan_perf_link_errors_total = CounterMetricFamily('nexsan_perf_link_errors_total', '', labels=['controller', 'port', 'name'])
         self.__nexsan_perf_load_ratio = GaugeMetricFamily('nexsan_perf_load_ratio', '', labels=['array', 'owner'])
+        self.__nexsan_maid_good = GaugeMetricFamily('nexsan_maid_good', '')
+        for x in ['active', 'idle', 'slow', 'stopped', 'off', 'standby', 'efficiency']:
+            setattr(self, '_Collector__nexsan_maid_{}_ratio'.format(x), GaugeMetricFamily('nexsan_maid_{}_ratio'.format(x), '', labels=['group']))
 
     def isgood(self, elem):
         if elem.attrib['good'] == 'yes':
@@ -74,6 +77,8 @@ class Collector:
                 self.collect_volume_stats(child)
             elif child.tag == 'nexsan_perf_status':
                 self.collect_perf_status(child)
+            elif child.tag == 'nexsan_maid_stats':
+                self.collect_maid_stats(child)
 
         yield from (v for k, v in self.__dict__.items() if k.startswith('_Collector__nexsan_'))
 
@@ -174,3 +179,10 @@ class Collector:
 
         for array in perf.iterfind('./array'):
             self.__nexsan_perf_load_ratio.add_metric([array.attrib['name'], array.findtext('./owner')], int(array.findtext('./load_percent'))/100)
+
+    def collect_maid_stats(self, maid):
+        self.__nexsan_maid_good.add_metric([], self.isgood(maid.find('./maid_stats_status')))
+
+        for group in maid.iterfind('./maid_group'):
+            for x in ['active', 'idle', 'slow', 'stopped', 'off', 'standby', 'efficiency']:
+                getattr(self, '_Collector__nexsan_maid_{}_ratio'.format(x)).add_metric([group.attrib['name']], int(group.findtext('./{}_percent'.format(x)))/100)

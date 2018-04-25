@@ -687,3 +687,108 @@ def test_perf_array_load_ratio(nexsan_perf):
         ('nexsan_perf_load_ratio', {'array': 'array1', 'owner': '1'}, 0.18),
         ('nexsan_perf_load_ratio', {'array': 'array2', 'owner': '0'}, 0.16),
     ] == mf.samples
+
+@pytest.fixture
+def nexsan_maid(request):
+    return ET.fromstring('''
+      <nexsan_op_status version="2" status="experimental">
+        <nexsan_maid_stats version="2" status="experimental">
+          <maid_state>enabled</maid_state>
+          <maid_stats_status good="yes">Valid and available</maid_stats_status>
+            <maid_group name="g1">
+              <active_percent>90</active_percent>
+              <idle_percent>80</idle_percent>
+              <slow_percent>70</slow_percent>
+              <stopped_percent>60</stopped_percent>
+              <off_percent>50</off_percent>
+              <standby_percent>40</standby_percent>
+              <efficiency_percent>30</efficiency_percent>
+            </maid_group>
+            <maid_group name="g2">
+              <active_percent>29</active_percent>
+              <idle_percent>28</idle_percent>
+              <slow_percent>27</slow_percent>
+              <stopped_percent>26</stopped_percent>
+              <off_percent>25</off_percent>
+              <standby_percent>24</standby_percent>
+              <efficiency_percent>23</efficiency_percent>
+            </maid_group>
+          </nexsan_maid_stats>
+        </nexsan_op_status>
+      ''')
+
+def test_maid_good_1(nexsan_maid):
+    c = nexsan.Collector(nexsan_maid)
+    mf = getmf(c.collect(), 'nexsan_maid_good')
+    assert 'gauge' == mf.type
+    assert [('nexsan_maid_good', {}, 1),] == mf.samples
+
+def test_maid_good_1(nexsan_maid):
+    nexsan_maid.find('.//maid_stats_status').attrib['good'] = 'no'
+    c = nexsan.Collector(nexsan_maid)
+    mf = getmf(c.collect(), 'nexsan_maid_good')
+    assert 'gauge' == mf.type
+    assert [('nexsan_maid_good', {}, 0),] == mf.samples
+
+def test_maid_active_ratio(nexsan_maid):
+    c = nexsan.Collector(nexsan_maid)
+    mf = getmf(c.collect(), 'nexsan_maid_active_ratio')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_maid_active_ratio', {'group': 'g1'}, 0.9),
+        ('nexsan_maid_active_ratio', {'group': 'g2'}, 0.29),
+    ] == mf.samples
+
+def test_maid_idle_ratio(nexsan_maid):
+    c = nexsan.Collector(nexsan_maid)
+    mf = getmf(c.collect(), 'nexsan_maid_idle_ratio')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_maid_idle_ratio', {'group': 'g1'}, 0.8),
+        ('nexsan_maid_idle_ratio', {'group': 'g2'}, 0.28),
+    ] == mf.samples
+
+def test_maid_slow_ratio(nexsan_maid):
+    c = nexsan.Collector(nexsan_maid)
+    mf = getmf(c.collect(), 'nexsan_maid_slow_ratio')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_maid_slow_ratio', {'group': 'g1'}, 0.7),
+        ('nexsan_maid_slow_ratio', {'group': 'g2'}, 0.27),
+    ] == mf.samples
+
+def test_maid_stopped_ratio(nexsan_maid):
+    c = nexsan.Collector(nexsan_maid)
+    mf = getmf(c.collect(), 'nexsan_maid_stopped_ratio')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_maid_stopped_ratio', {'group': 'g1'}, 0.6),
+        ('nexsan_maid_stopped_ratio', {'group': 'g2'}, 0.26),
+    ] == mf.samples
+
+def test_maid_off_ratio(nexsan_maid):
+    c = nexsan.Collector(nexsan_maid)
+    mf = getmf(c.collect(), 'nexsan_maid_off_ratio')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_maid_off_ratio', {'group': 'g1'}, 0.5),
+        ('nexsan_maid_off_ratio', {'group': 'g2'}, 0.25),
+    ] == mf.samples
+
+def test_maid_standby_ratio(nexsan_maid):
+    c = nexsan.Collector(nexsan_maid)
+    mf = getmf(c.collect(), 'nexsan_maid_standby_ratio')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_maid_standby_ratio', {'group': 'g1'}, 0.4),
+        ('nexsan_maid_standby_ratio', {'group': 'g2'}, 0.24),
+    ] == mf.samples
+
+def test_maid_efficiency_ratio(nexsan_maid):
+    c = nexsan.Collector(nexsan_maid)
+    mf = getmf(c.collect(), 'nexsan_maid_efficiency_ratio')
+    assert 'gauge' == mf.type
+    assert [
+        ('nexsan_maid_efficiency_ratio', {'group': 'g1'}, 0.3),
+        ('nexsan_maid_efficiency_ratio', {'group': 'g2'}, 0.23),
+    ] == mf.samples
