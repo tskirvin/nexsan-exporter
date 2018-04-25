@@ -1,6 +1,3 @@
-import base64
-import prometheus_client
-import traceback
 import urllib.request
 import urllib.parse
 
@@ -12,11 +9,13 @@ def probe(target, user, pass_):
     '''
     Returns a collector populated with metrics from the target array.
     '''
-    auth = b'Basic ' + base64.b64encode('{}:{}'.format(user, pass_).encode('latin1'))
     url = urllib.parse.urlunsplit(('http', target, '/admin/opstats.asp', None, None))
-    req = urllib.request.Request(url)
-    req.add_header(b'Authorization', auth)
-    with urllib.request.urlopen(req, timeout=5) as resp:
+
+    password_mgr = urllib.request.HTTPPasswordMgrWithDefaultRealm()
+    password_mgr.add_password(None, url, user, pass_)
+    handler = urllib.request.HTTPBasicAuthHandler(password_mgr)
+    opener = urllib.request.build_opener(handler)
+    with opener.open(url, timeout=5) as resp:
         return Collector(ElementTree.parse(resp))
 
 class Collector:

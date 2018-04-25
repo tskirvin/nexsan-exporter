@@ -792,3 +792,48 @@ def test_maid_efficiency_ratio(nexsan_maid):
         ('nexsan_maid_efficiency_ratio', {'group': 'g1'}, 0.3),
         ('nexsan_maid_efficiency_ratio', {'group': 'g2'}, 0.23),
     ] == mf.samples
+
+def test_probe():
+    import http.server
+    import base64
+    class Handler(http.server.BaseHTTPRequestHandler):
+        expected = base64.b64encode(b'%b:%b' % (b'testuser', b'testpass')).decode('latin1')
+
+        def do_GET(self):
+            auth = self.headers.get('Authorization')
+            if auth is None:
+                self.unauthorized()
+                return
+            scheme, value = auth.split()
+            if scheme != 'Basic' or value != self.expected:
+                self.unauthorized()
+                return
+            self.authorized()
+
+        def unauthorized(self):
+            self.send_response(401)
+            self.send_header('WWW-Authenticate', 'Basic realm="blah"')
+            self.end_headers()
+
+        def authorized(self):
+            if self.path == '/admin/opstats.asp':
+                self.send_response(200)
+                self.end_headers()
+                self.wfile.write(b'<nexsan_op_status version="2" status="experimental"/>')
+            else:
+                self.send_response(404)
+                self.end_headers()
+
+    server = http.server.HTTPServer(('127.0.0.1', 0), Handler)
+
+    import functools
+    import threading
+    t = threading.Thread(target=functools.partial(server.serve_forever, 1), name='test_probe_server')
+    t.start()
+    try:
+        target = '{}:{}'.format(*server.server_address)
+        c = nexsan.probe('{}:{}'.format(*server.server_address), 'testuser', 'testpass')
+        assert nexsan.Collector is type(c)
+    finally:
+        server.shutdown()
+        t.join()
