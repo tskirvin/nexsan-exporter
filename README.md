@@ -113,8 +113,12 @@ To run the tests:
 $ python3 setup.py test
 ```
 
-For coverage reports:
+To use custom test options, it's easier to run via `python3 -m pytest ...`.
+e.g., for coverage reports:
 
 ```
 $ python3 -m pytest --cov=nexsan_exporter --cov-report=html
 ```
+
+Note that the plain `pytest` command will fail, because it doesn't put `.` into
+`sys.path` 🤷.
