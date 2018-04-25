@@ -17,25 +17,22 @@ def test_attrib_bad():
     c = nexsan.Collector(elem)
     assert 0 == c.isgood(elem)
 
-@pytest.fixture
-def datadir(request):
+@pytest.fixture(params=['opstats1.xml', 'opstats2.xml'])
+def opstats_xml(request):
     '''
     Returns a file-like object for the Collector to consume.
     '''
-    filename = request.module.__file__
-    test_dir, _ = os.path.splitext(filename)
+    test_dir, _ = os.path.splitext(request.module.__file__)
+    filename = request.param
+    with open(os.path.join(test_dir, filename)) as f:
+        return ET.parse(f)
 
-    assert os.path.isdir(test_dir)
-    return test_dir
-
-@pytest.mark.parametrize('name', ['opstats1.xml', 'opstats2.xml'])
-def test_opstats(datadir, name):
+def test_opstats(opstats_xml):
     '''
     Tests that real-world data parses.
     '''
-    with open(os.path.join(datadir, name)) as f:
-        metrics = list(nexsan.Collector(ET.parse(f)).collect())
-        assert 0 < len(metrics)
+    metrics = list(nexsan.Collector(opstats_xml).collect())
+    assert 0 < len(metrics)
 
 def getmf(families, name):
     skipped = []
