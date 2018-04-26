@@ -2,6 +2,10 @@
 
 SHELL := /bin/bash
 
+# pybuild "helpfully" sets http_proxy=http://127.0.0.1:9/ which breaks tests
+# which set up a web server and try to connect to it with urllib.request.
+export no_proxy := 127.0.0.1
+
 %:
 	dh $@ --with=python3 --buildsystem=pybuild
 
