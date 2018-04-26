@@ -955,6 +955,19 @@ def probe_server():
         expected = base64.b64encode(b'%b:%b' % (b'testuser', b'testpass')).decode('latin1')
 
         def do_GET(self):
+            if self.path == '/admin/opstats.asp':
+                self.opstats()
+            elif self.path == '/ready':
+                self.ready()
+            else:
+                self.send_response(404)
+                self.end_headers()
+
+        def ready(self):
+            self.send_response(200)
+            self.end_headers()
+
+        def opstats(self):
             auth = self.headers.get('Authorization')
             if auth is None:
                 self.unauthorized()
@@ -971,13 +984,9 @@ def probe_server():
             self.end_headers()
 
         def authorized(self):
-            if self.path == '/admin/opstats.asp':
-                self.send_response(200)
-                self.end_headers()
-                self.wfile.write(b'<nexsan_op_status version="2" status="experimental"/>')
-            else:
-                self.send_response(404)
-                self.end_headers()
+            self.send_response(200)
+            self.end_headers()
+            self.wfile.write(b'<nexsan_op_status version="2" status="experimental"/>')
 
     server = http.server.HTTPServer(('127.0.0.1', 0), Handler)
 
@@ -985,15 +994,30 @@ def probe_server():
     import threading
     t = threading.Thread(target=functools.partial(server.serve_forever, 1), name='test_probe_server')
     t.start()
-    # We need to wait for server to be ready, but there doesn't appear to be a
-    # way to do that, so...
-    import time
-    time.sleep(0.25)
+    try:
+        import time
+        import socket
+        import urllib.request
+        tries = 10
+        for x in range(tries):
+            try:
+                urllib.request.urlopen('http://{}:{}/ready'.format(*server.server_address), timeout=0.1)
+            except socket.timeout:
+                print('Server not ready yet... timeout')
+                continue
+            else:
+                yield server
+                break
 
-    yield server
+            time.sleep(0.05)
+        else:
+            raise Exception('Server did not start')
 
-    server.shutdown()
-    t.join()
+        # This hangs if the server wasn't started yet
+        server.shutdown()
+
+    finally:
+        t.join()
 
 def test_probe(probe_server):
     target = '{}:{}'.format(*probe_server.server_address)
