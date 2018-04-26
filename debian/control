@@ -12,6 +12,7 @@ Build-Depends:
 Standards-Version: 3.9.7
 Homepage: https://github.com/yrro/nexsan-exporter
 X-Python3-Version: >= 3.4
+Rules-Requires-Root: no
 
 Package: prometheus-nexsan-exporter
 Architecture: all
