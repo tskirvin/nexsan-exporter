@@ -10,9 +10,13 @@ exporter](https://github.com/prometheus/blackbox_exporter).
 Running
 -------
 
+If you don't have [pipenv](https://github.com/pypa/pipenv):
+
 ```
-$ python3 -m pip install git+https://github.com/yrro/nexsan-exporter.git
-$ nexsan-exporter
+$ python3 -m pip install pipenv # only if you don't have pipenv
+$ git clone https://github.com/yrro/nexsan-exporter.git
+$ pipenv install
+$ pipenv run nexsan-exporter
 ```
 
 You can then visit <http://localhost:9335/probe?target=192.0.2.1&user=foo&pass=bar> to view
@@ -96,28 +100,21 @@ module.
 To fetch and install dependencies and run `exporter` from source:
 
 ```
-$ python3 -m pip install -e .
-$ nexsan-exporter
-```
-
-or, without installing:
-
-
-```
-$ python3 -m nexsan_exporter
+$ pipenv install --dev
+$ pipenv run python3 -m nexsan_exporter
 ```
 
 To run the tests:
 
 ```
-$ python3 setup.py test
+$ pipenv run python3 -m setup.py test
 ```
 
-To use custom test options, it's easier to run via `python3 -m pytest ...`.
-e.g., for coverage reports:
+To use custom test options, it's easier to run pytest directly. e.g., for
+coverage reports:
 
 ```
-$ python3 -m pytest --cov=nexsan_exporter --cov-report=html
+$ pipenv run python3 -m pytest --cov=nexsan_exporter --cov-report=html
 ```
 
 Note that the plain `pytest` command will fail, because it doesn't put `.` into

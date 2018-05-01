@@ -37,16 +37,6 @@ setup(
     ],
     keywords = 'prometheus monitoring nexsan storage',
     packages = ['nexsan_exporter'],
-    install_requires = [
-        'prometheus_client',
-        'setuptools',
-    ],
-    setup_requires = [
-        'pytest-runner',
-    ],
-    tests_require = [
-        'pytest',
-    ],
     entry_points = {
         'console_scripts': [
             'nexsan-exporter = nexsan_exporter:main',
